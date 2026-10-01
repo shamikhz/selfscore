@@ -122,9 +122,6 @@ export const InstallPrompt: React.FC = () => {
               <h4 className="text-sm font-semibold text-foreground tracking-tight">
                 Install SelfScore App
               </h4>
-              <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                Fast offline access & distraction-free reflection.
-              </p>
             </div>
           </div>
 
