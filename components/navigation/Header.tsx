@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Compass, History, Sparkles, Info, Shield, FileText, Menu, X, Home } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
@@ -39,45 +40,53 @@ export const Header: React.FC = () => {
           <span className="font-bold">SelfScore</span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav
-          aria-label="Main Navigation"
-          className="hidden sm:flex items-center gap-1.5 text-sm font-medium"
-        >
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-colors ${
-                  isActive
-                    ? "bg-surface-subtle text-primary font-semibold shadow-xs"
-                    : "text-muted-foreground hover:text-foreground hover:bg-surface-subtle/70"
-                }`}
-              >
-                <Icon className="w-4 h-4" aria-hidden="true" />
-                <span>{link.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
+        {/* Right Section: Desktop Navigation & Theme Toggle */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          {/* Desktop Navigation Links */}
+          <nav
+            aria-label="Main Navigation"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-medium"
+          >
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-colors ${
+                    isActive
+                      ? "bg-surface-subtle text-primary font-semibold shadow-xs"
+                      : "text-muted-foreground hover:text-foreground hover:bg-surface-subtle/70"
+                  }`}
+                >
+                  <Icon className="w-4 h-4" aria-hidden="true" />
+                  <span>{link.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
 
-        {/* Mobile Menu Toggle Button */}
-        <button
-          type="button"
-          aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
-          aria-expanded={mobileMenuOpen}
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-          className="sm:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-surface-subtle transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          {mobileMenuOpen ? (
-            <X className="w-5 h-5 text-foreground" aria-hidden="true" />
-          ) : (
-            <Menu className="w-5 h-5" aria-hidden="true" />
-          )}
-        </button>
+          {/* Theme Toggle Button (Visible on all devices) */}
+          <div className="border-l border-surface-border pl-1 sm:pl-2 ml-1">
+            <ThemeToggle />
+          </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            type="button"
+            aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="sm:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-surface-subtle transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ml-0.5"
+          >
+            {mobileMenuOpen ? (
+              <X className="w-5 h-5 text-foreground" aria-hidden="true" />
+            ) : (
+              <Menu className="w-5 h-5" aria-hidden="true" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu */}
@@ -102,6 +111,11 @@ export const Header: React.FC = () => {
               </Link>
             );
           })}
+
+          {/* Mobile Drawer Theme Toggle Row */}
+          <div className="pt-2 mt-2 border-t border-surface-border">
+            <ThemeToggle variant="row" />
+          </div>
         </div>
       )}
     </header>
