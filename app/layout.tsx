@@ -64,14 +64,14 @@ export default function RootLayout({
         {/* Main Content Landmark */}
         <main
           id="main-content"
-          className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 pb-24 sm:pb-12"
+          className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-12"
         >
           {children}
         </main>
 
         {/* Desktop & Tablet Footer */}
         <footer className="hidden sm:block border-t border-surface-border bg-surface py-8 text-xs text-muted">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
               <p className="font-medium text-foreground">
                 SelfScore Assessment Platform

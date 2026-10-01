@@ -81,12 +81,12 @@ export default function ResultsHistoryPage() {
           </Link>
         </Card>
       ) : (
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           {resultsList.map(({ result, title, slug }) => (
             <Card
               key={slug}
               variant="default"
-              className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="p-5 flex flex-col justify-between gap-4"
             >
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
