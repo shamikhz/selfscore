@@ -46,16 +46,11 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
         )}
       </div>
 
-      {/* Option Text and Description */}
-      <div className="flex-1 space-y-0.5">
+      {/* Option Text */}
+      <div className="flex-1">
         <div className="text-sm sm:text-base font-medium leading-snug">
           {option.label}
         </div>
-        {option.description && (
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            {option.description}
-          </p>
-        )}
       </div>
     </button>
   );

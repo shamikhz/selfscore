@@ -5,37 +5,37 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q1",
     title: "Which element logically completes the pattern: Circle, Square, Circle, Square, Circle, ...?",
-    subtitle: "Identify the immediate repeating alternating sequence.",
+    subtitle: "Select the option that logically comes next.",
     type: "single-choice",
     dimension: "Visual Logic",
     options: [
       { id: "iq_1_a", label: "Triangle", value: 0 },
-      { id: "iq_1_b", label: "Square", value: 5, description: "Correct alternating shape" },
+      { id: "iq_1_b", label: "Square", value: 5 },
       { id: "iq_1_c", label: "Circle", value: 0 },
       { id: "iq_1_d", label: "Pentagon", value: 0 },
     ],
   },
   {
     id: "iq_q2",
-    title: "A 3x3 grid displays shaded cells in the top row: [1st cell, 2nd cell, 3rd cell]. Next row: [2nd cell, 3rd cell, 1st cell]. What should the 3rd row start with to maintain cyclical shift?",
-    subtitle: "Notice the horizontal leftward wrap-around shift.",
+    title: "A 3x3 grid displays shaded cells in the top row: [1st cell, 2nd cell, 3rd cell]. Next row: [2nd cell, 3rd cell, 1st cell]. What should the 3rd row start with to maintain the pattern?",
+    subtitle: "Determine the logical rule governing the rows.",
     type: "single-choice",
     dimension: "Visual Logic",
     options: [
       { id: "iq_2_a", label: "1st cell", value: 0 },
       { id: "iq_2_b", label: "2nd cell", value: 0 },
-      { id: "iq_2_c", label: "3rd cell", value: 5, description: "Maintains cyclic permutation [3, 1, 2]" },
+      { id: "iq_2_c", label: "3rd cell", value: 5 },
       { id: "iq_2_d", label: "All cells unshaded", value: 0 },
     ],
   },
   {
     id: "iq_q3",
-    title: "Consider the symmetry: Shape A points North. Shape B points East. Shape C points South. Which direction must Shape D point to complete a 90° clockwise cycle?",
-    subtitle: "Rotational progression in 2D space.",
+    title: "Consider the symmetry: Shape A points North. Shape B points East. Shape C points South. Which direction must Shape D point to complete the cycle?",
+    subtitle: "Follow the rotational progression.",
     type: "single-choice",
     dimension: "Visual Logic",
     options: [
-      { id: "iq_3_a", label: "West", value: 5, description: "Completes the 360-degree rotation" },
+      { id: "iq_3_a", label: "West", value: 5 },
       { id: "iq_3_b", label: "North-West", value: 0 },
       { id: "iq_3_c", label: "South-West", value: 0 },
       { id: "iq_3_d", label: "North", value: 0 },
@@ -43,8 +43,8 @@ export const iqQuestions: Question[] = [
   },
   {
     id: "iq_q4",
-    title: "When inspecting overlapping transparent geometric figures, how easily do you isolate intersecting intersections?",
-    subtitle: "Self-perceived figure-ground segregation ability.",
+    title: "When inspecting overlapping transparent geometric figures, how easily do you isolate individual intersecting shapes?",
+    subtitle: "Rate how easily you isolate overlapping figures.",
     type: "likert-scale",
     dimension: "Visual Logic",
     options: [
@@ -58,13 +58,13 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q5",
     title: "Rule check: In an inverted matrix, if White becomes Black and Dots become Crosses, what does a White square with a Dot become?",
-    subtitle: "Simultaneous dual-rule transformation.",
+    subtitle: "Apply the transformation rules to the target figure.",
     type: "single-choice",
     dimension: "Visual Logic",
     options: [
       { id: "iq_5_a", label: "Black square with a Dot", value: 0 },
       { id: "iq_5_b", label: "White square with a Cross", value: 0 },
-      { id: "iq_5_c", label: "Black square with a Cross", value: 5, description: "Both color inversion and symbol swap applied" },
+      { id: "iq_5_c", label: "Black square with a Cross", value: 5 },
       { id: "iq_5_d", label: "Grey square with no inner symbol", value: 0 },
     ],
   },
@@ -73,12 +73,12 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q6",
     title: "What number comes next in the progression: 2, 6, 12, 20, 30, ...?",
-    subtitle: "Observe the differences: +4, +6, +8, +10...",
+    subtitle: "Identify the mathematical pattern to find the next number.",
     type: "single-choice",
     dimension: "Sequence Analysis",
     options: [
       { id: "iq_6_a", label: "40", value: 0 },
-      { id: "iq_6_b", label: "42", value: 5, description: "30 + 12 = 42" },
+      { id: "iq_6_b", label: "42", value: 5 },
       { id: "iq_6_c", label: "44", value: 0 },
       { id: "iq_6_d", label: "48", value: 0 },
     ],
@@ -86,11 +86,11 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q7",
     title: "Identify the missing value in this alternating series: 100, 2, 90, 4, 80, 8, [ ? ], 16",
-    subtitle: "Two interleaved sequences: one decreasing by 10, one doubling.",
+    subtitle: "Find the missing number that continues the series.",
     type: "single-choice",
     dimension: "Sequence Analysis",
     options: [
-      { id: "iq_7_a", label: "70", value: 5, description: "Interleaved 100 -> 90 -> 80 -> 70" },
+      { id: "iq_7_a", label: "70", value: 5 },
       { id: "iq_7_b", label: "75", value: 0 },
       { id: "iq_7_c", label: "60", value: 0 },
       { id: "iq_7_d", label: "12", value: 0 },
@@ -99,20 +99,20 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q8",
     title: "Alphabetical progression: A, C, F, J, O, ... What is the next letter?",
-    subtitle: "Increments in alphabet rank: +2, +3, +4, +5, ...",
+    subtitle: "Determine which letter logically follows in the sequence.",
     type: "single-choice",
     dimension: "Sequence Analysis",
     options: [
       { id: "iq_8_a", label: "S", value: 0 },
       { id: "iq_8_b", label: "T", value: 0 },
-      { id: "iq_8_c", label: "U", value: 5, description: "O is 15th letter, 15 + 6 = 21 (U)" },
+      { id: "iq_8_c", label: "U", value: 5 },
       { id: "iq_8_d", label: "V", value: 0 },
     ],
   },
   {
     id: "iq_q9",
-    title: "I often notice mathematical and structural patterns in everyday data or timestamps without conscious effort.",
-    subtitle: "Spontaneous pattern detection propensity.",
+    title: "I notice numerical and structural patterns in everyday data or timestamps without conscious effort.",
+    subtitle: "Rate how frequently you notice natural patterns.",
     type: "likert-scale",
     dimension: "Sequence Analysis",
     options: [
@@ -125,14 +125,14 @@ export const iqQuestions: Question[] = [
   },
   {
     id: "iq_q10",
-    title: "Fibonacci-variant sequence: 3, 5, 8, 13, 21, [ ? ]",
-    subtitle: "Sum of the two preceding terms.",
+    title: "Sequential pattern: 3, 5, 8, 13, 21, [ ? ]",
+    subtitle: "Identify the pattern to calculate the missing term.",
     type: "single-choice",
     dimension: "Sequence Analysis",
     options: [
       { id: "iq_10_a", label: "31", value: 0 },
       { id: "iq_10_b", label: "33", value: 0 },
-      { id: "iq_10_c", label: "34", value: 5, description: "13 + 21 = 34" },
+      { id: "iq_10_c", label: "34", value: 5 },
       { id: "iq_10_d", label: "37", value: 0 },
     ],
   },
@@ -141,11 +141,11 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q11",
     title: "If a standard 6-sided die is unfolded into a cross with '1' at the center, and opposite sides always sum to 7, which number must be directly on the opposite side to 1?",
-    subtitle: "Spatial cube folding rule.",
+    subtitle: "Determine the opposite face when folded into a cube.",
     type: "single-choice",
     dimension: "Spatial Deduction",
     options: [
-      { id: "iq_11_a", label: "6", value: 5, description: "1 + 6 = 7" },
+      { id: "iq_11_a", label: "6", value: 5 },
       { id: "iq_11_b", label: "5", value: 0 },
       { id: "iq_11_c", label: "4", value: 0 },
       { id: "iq_11_d", label: "2", value: 0 },
@@ -154,12 +154,12 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q12",
     title: "Imagine folding a square sheet of paper in half from left to right, then punching a hole in the top-right corner. When fully unfolded, where are the holes?",
-    subtitle: "Symmetry reflection across vertical fold axis.",
+    subtitle: "Visualize the result after unfolding the sheet.",
     type: "single-choice",
     dimension: "Spatial Deduction",
     options: [
       { id: "iq_12_a", label: "One hole in the top right only", value: 0 },
-      { id: "iq_12_b", label: "Two holes: top-right and top-left corners", value: 5, description: "Symmetric reflection across central vertical fold line" },
+      { id: "iq_12_b", label: "Two holes: top-right and top-left corners", value: 5 },
       { id: "iq_12_c", label: "Two holes: top-right and bottom-right corners", value: 0 },
       { id: "iq_12_d", label: "Four holes: all four corners", value: 0 },
     ],
@@ -167,7 +167,7 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q13",
     title: "How easily can you mentally rotate 3D objects to determine if two silhouettes are identical or mirror images?",
-    subtitle: "Mental rotation and spatial orientation facility.",
+    subtitle: "Rate your mental rotation and spatial orientation comfort.",
     type: "likert-scale",
     dimension: "Spatial Deduction",
     options: [
@@ -181,11 +181,11 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q14",
     title: "A clock shows 3:15. If the entire clock is viewed through a vertical flat mirror, what time does the reflection appear to show?",
-    subtitle: "Horizontal inversion of clock hands.",
+    subtitle: "Determine the mirror reflection of the clock hands.",
     type: "single-choice",
     dimension: "Spatial Deduction",
     options: [
-      { id: "iq_14_a", label: "8:45", value: 5, description: "Minute hand at 3 reflects to 9; hour hand slightly past 3 reflects to slightly before 9" },
+      { id: "iq_14_a", label: "8:45", value: 5 },
       { id: "iq_14_b", label: "9:15", value: 0 },
       { id: "iq_14_c", label: "3:45", value: 0 },
       { id: "iq_14_d", label: "9:45", value: 0 },
@@ -194,11 +194,11 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q15",
     title: "Gear A (with 20 teeth) meshes directly with Gear B (with 40 teeth). If Gear A rotates 2 full revolutions clockwise, how does Gear B rotate?",
-    subtitle: "Mechanical ratio and counter-directional rotation.",
+    subtitle: "Calculate the rotation of the interconnected gear.",
     type: "single-choice",
     dimension: "Spatial Deduction",
     options: [
-      { id: "iq_15_a", label: "1 revolution counter-clockwise", value: 5, description: "Inverse direction and half the revolutions due to 2:1 gear ratio" },
+      { id: "iq_15_a", label: "1 revolution counter-clockwise", value: 5 },
       { id: "iq_15_b", label: "2 revolutions counter-clockwise", value: 0 },
       { id: "iq_15_c", label: "1 revolution clockwise", value: 0 },
       { id: "iq_15_d", label: "4 revolutions counter-clockwise", value: 0 },
@@ -209,11 +209,11 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q16",
     title: "Premise 1: All Zips are Zops. Premise 2: Some Zops are Zaps. Premise 3: No Zap is a Zip. Can a Zap be a Zop?",
-    subtitle: "Formal syllogistic deduction.",
+    subtitle: "Evaluate the conclusion based strictly on the premises.",
     type: "single-choice",
     dimension: "Cognitive Speed",
     options: [
-      { id: "iq_16_a", label: "Yes, definitely", value: 5, description: "Directly affirmed by Premise 2 ('Some Zops are Zaps')" },
+      { id: "iq_16_a", label: "Yes, definitely", value: 5 },
       { id: "iq_16_b", label: "No, impossible", value: 0 },
       { id: "iq_16_c", label: "Only if Zips are Zaps", value: 0 },
       { id: "iq_16_d", label: "Cannot be determined", value: 0 },
@@ -226,19 +226,19 @@ export const iqQuestions: Question[] = [
     type: "scenario",
     dimension: "Cognitive Speed",
     options: [
-      { id: "iq_17_1", label: "Deconstruct the outermost constraints first, isolating one variable at a time.", value: 5, description: "Structured analytical decoupling" },
-      { id: "iq_17_2", label: "Scan the overall visual rhythm to spot anomalies before checking specifics.", value: 4, description: "Heuristic holistic parsing" },
-      { id: "iq_17_3", label: "Guess probable answers based on partial similarities to previous problems.", value: 2, description: "Heuristic approximation without complete validation" },
-      { id: "iq_17_4", label: "Re-read the instructions repeatedly until the pressure causes fatigue.", value: 1, description: "Analysis paralysis under constraint" },
+      { id: "iq_17_1", label: "Deconstruct the outermost constraints first, isolating one variable at a time.", value: 5 },
+      { id: "iq_17_2", label: "Scan the overall visual rhythm to spot anomalies before checking specifics.", value: 4 },
+      { id: "iq_17_3", label: "Guess probable answers based on partial similarities to previous problems.", value: 2 },
+      { id: "iq_17_4", label: "Re-read the instructions repeatedly until the pressure causes fatigue.", value: 1 },
     ],
   },
   {
     id: "iq_q18",
     title: "I often hesitate and lose momentum when problems require holding multiple abstract rules in working memory at once.",
-    subtitle: "Reverse-scored working memory load indicator.",
+    subtitle: "Rate how accurately this describes your experience.",
     type: "likert-scale",
     dimension: "Cognitive Speed",
-    reversed: true, // Reverse scored: Strongly Disagree yields maximum points
+    reversed: true,
     options: [
       { id: "iq_18_1", label: "Strongly Agree", value: 1 },
       { id: "iq_18_2", label: "Agree", value: 2 },
@@ -249,12 +249,12 @@ export const iqQuestions: Question[] = [
   },
   {
     id: "iq_q19",
-    title: "A code replaces letters by their reversed position in the alphabet: A=Z, B=Y, C=X. What does the word 'GLOW' encode to? (Note: G=20th from end=T, L=15th=O, O=12th=L, W=4th=D)",
-    subtitle: "Rapid symbolic translation under constraint.",
+    title: "A code replaces letters by their reversed position in the alphabet: A=Z, B=Y, C=X, and so on. What does the word 'GLOW' encode to?",
+    subtitle: "Translate the word according to the substitution rule.",
     type: "single-choice",
     dimension: "Cognitive Speed",
     options: [
-      { id: "iq_19_a", label: "TOLD", value: 5, description: "G->T, L->O, O->L, W->D" },
+      { id: "iq_19_a", label: "TOLD", value: 5 },
       { id: "iq_19_b", label: "SOLD", value: 0 },
       { id: "iq_19_c", label: "TOLE", value: 0 },
       { id: "iq_19_d", label: "TLOD", value: 0 },
@@ -263,11 +263,11 @@ export const iqQuestions: Question[] = [
   {
     id: "iq_q20",
     title: "Final Synthesis: In a sequence where shape sides multiply by 2 (Triangle [3], Hexagon [6], Dodecagon [12]), and shading alternates (Solid, Striped, Solid), what is the 4th figure?",
-    subtitle: "Combined geometric vertex multiplication and periodic shading.",
+    subtitle: "Identify the next shape and shading in the sequence.",
     type: "single-choice",
     dimension: "Cognitive Speed",
     options: [
-      { id: "iq_20_a", label: "A 24-sided polygon with Striped shading", value: 5, description: "12 * 2 = 24 sides, alternating shading is Striped" },
+      { id: "iq_20_a", label: "A 24-sided polygon with Striped shading", value: 5 },
       { id: "iq_20_b", label: "A 24-sided polygon with Solid shading", value: 0 },
       { id: "iq_20_c", label: "An 18-sided polygon with Striped shading", value: 0 },
       { id: "iq_20_d", label: "A 16-sided polygon with Empty shading", value: 0 },
