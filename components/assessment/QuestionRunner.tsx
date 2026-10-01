@@ -15,6 +15,7 @@ import { Card } from "@/components/ui/Card";
 import { saveProgress, getProgress, clearProgress } from "@/lib/storage/progressStorage";
 import { generateAssessmentResult } from "@/lib/assessment-engine/resultGenerator";
 import { saveResult } from "@/lib/storage/resultStorage";
+import { AdSlot } from "@/components/ads/AdSlot";
 
 export interface QuestionRunnerProps {
   slug: string;
@@ -244,7 +245,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
       </header>
 
       {/* Primary Question Presentation Card */}
-      <main className="flex-1 py-4 sm:py-6">
+      <main className="flex-1 py-4 sm:py-6 space-y-4">
         <Card variant="default" className="p-5 sm:p-7 shadow-sm">
           <QuestionCard
             key={currentQuestion.id}
@@ -253,6 +254,9 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
             onSelectAnswer={handleSelectAnswer}
           />
         </Card>
+
+        {/* Question Runner Sponsor Slot */}
+        <AdSlot placement="questionScreen" className="my-4" />
       </main>
 
       {/* Thumb-Zone Fixed/Docked Navigation Controls */}

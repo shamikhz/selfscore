@@ -45,16 +45,20 @@ export const AD_CONFIG: AdSystemConfig = {
       sponsorTagline: "Turn your assessment strengths into lasting daily routines without burnout.",
     },
     assessmentIntro: {
-      enabled: false,
-      format: "banner",
-      minHeight: 90,
-      label: "Sponsored",
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 130,
+      label: "Sponsored Partner",
+      sponsorName: "Growth Partner",
+      sponsorTagline: "Curated tools and resources for intentional self-reflection.",
     },
     questionScreen: {
-      // STRICT RULE: Strictly disabled during active question runner (Zero distraction & 0 layout shift)
-      enabled: false,
-      format: "banner",
-      minHeight: 0,
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 120,
+      label: "Sponsored",
+      sponsorName: "FocusCraft",
+      sponsorTagline: "Mindfulness & productivity tools to sharpen your focus.",
     },
     resultsMain: {
       enabled: true,
