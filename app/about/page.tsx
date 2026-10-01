@@ -66,6 +66,32 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Legal & Transparency Links */}
+      <div className="p-5 rounded-2xl bg-surface border border-surface-border space-y-3">
+        <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+          Legal & Transparency
+        </h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          SelfScore operates with complete privacy: no user tracking, no backend database for your test answers, and zero data selling.
+        </p>
+        <div className="flex flex-wrap items-center gap-3 pt-1">
+          <Link
+            href="/privacy"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline bg-primary-subtle/80 px-3 py-1.5 rounded-lg border border-primary/20"
+          >
+            <span>Privacy Policy</span>
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
+          <Link
+            href="/terms"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground/80 hover:text-foreground hover:underline bg-surface-subtle px-3 py-1.5 rounded-lg border border-surface-border"
+          >
+            <span>Terms of Service</span>
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+
       <div className="p-6 rounded-2xl bg-surface border border-surface-border text-center space-y-4">
         <h3 className="text-lg font-semibold text-foreground">Start Your Reflection</h3>
         <p className="text-sm text-muted-foreground max-w-md mx-auto">

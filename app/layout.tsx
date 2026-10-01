@@ -69,36 +69,38 @@ export default function RootLayout({
           {children}
         </main>
 
-        {/* Desktop & Tablet Footer */}
-        <footer className="hidden sm:block border-t border-surface-border bg-surface py-8 text-xs text-muted">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        {/* Universal Footer (Visible on Mobile, Tablet & Desktop) */}
+        <footer className="border-t border-surface-border bg-surface py-8 pb-28 sm:pb-8 text-xs text-muted">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
             <div>
-              <p className="font-medium text-foreground">
+              <p className="font-semibold text-foreground text-sm sm:text-xs">
                 SelfScore Assessment Platform
               </p>
-              <p className="mt-0.5 text-muted-foreground">
+              <p className="mt-1 text-muted-foreground text-xs max-w-sm sm:max-w-none">
                 Informal self-discovery & personal reflection. Not a clinical diagnosis.
               </p>
             </div>
 
-            <nav aria-label="Footer Navigation" className="flex items-center gap-5">
+            <nav aria-label="Footer Navigation" className="flex flex-wrap justify-center items-center gap-3 sm:gap-5 pt-2 sm:pt-0">
               <Link
                 href="/about"
-                className="hover:text-foreground transition-colors"
+                className="py-1 px-2.5 rounded-md hover:text-foreground hover:bg-surface-subtle transition-colors text-xs font-medium text-foreground/80"
               >
                 About
               </Link>
+              <span className="text-surface-border hidden sm:inline" aria-hidden="true">•</span>
               <Link
                 href="/privacy"
-                className="hover:text-foreground transition-colors"
+                className="py-1 px-2.5 rounded-md hover:text-foreground hover:bg-surface-subtle transition-colors text-xs font-medium text-foreground/80"
               >
-                Privacy
+                Privacy Policy
               </Link>
+              <span className="text-surface-border hidden sm:inline" aria-hidden="true">•</span>
               <Link
                 href="/terms"
-                className="hover:text-foreground transition-colors"
+                className="py-1 px-2.5 rounded-md hover:text-foreground hover:bg-surface-subtle transition-colors text-xs font-medium text-foreground/80"
               >
-                Terms
+                Terms of Service
               </Link>
             </nav>
           </div>
