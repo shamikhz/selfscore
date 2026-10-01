@@ -5,12 +5,14 @@ import { AnswerOption } from "./AnswerOption";
 export interface ScenarioQuestionProps {
   question: Question;
   selectedValue?: number;
-  onSelect: (value: number) => void;
+  selectedOptionId?: string;
+  onSelect: (value: number, optionId: string) => void;
 }
 
 export const ScenarioQuestion: React.FC<ScenarioQuestionProps> = ({
   question,
   selectedValue,
+  selectedOptionId,
   onSelect,
 }) => {
   return (
@@ -29,7 +31,11 @@ export const ScenarioQuestion: React.FC<ScenarioQuestionProps> = ({
             key={option.id || option.value}
             option={option}
             index={idx}
-            isSelected={selectedValue === option.value}
+            isSelected={
+              selectedOptionId
+                ? selectedOptionId === option.id
+                : typeof selectedValue === "number" && selectedValue === option.value
+            }
             onSelect={onSelect}
           />
         ))}

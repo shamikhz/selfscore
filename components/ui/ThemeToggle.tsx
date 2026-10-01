@@ -19,7 +19,22 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
     setMounted(true);
     const hasDarkClass = document.documentElement.classList.contains("dark");
     setIsDark(hasDarkClass);
+
+    // Sync theme-color meta tag on initial mount
+    updateMetaThemeColor(hasDarkClass);
   }, []);
+
+  const updateMetaThemeColor = (darkMode: boolean) => {
+    try {
+      let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (!metaThemeColor) {
+        metaThemeColor = document.createElement("meta");
+        metaThemeColor.setAttribute("name", "theme-color");
+        document.head.appendChild(metaThemeColor);
+      }
+      metaThemeColor.setAttribute("content", darkMode ? "#0c0a09" : "#fafaf9");
+    } catch (_) {}
+  };
 
   const toggleTheme = () => {
     const nextDark = !isDark;
@@ -36,13 +51,15 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
         localStorage.setItem("selfscore_theme", "light");
       } catch (_) {}
     }
+
+    updateMetaThemeColor(nextDark);
   };
 
   if (!mounted) {
-    // Avoid layout shift before mount
+    // Prevent layout shift before client-side hydration
     return (
       <div
-        className={`w-9 h-9 rounded-xl bg-surface-subtle/50 flex items-center justify-center ${className}`}
+        className={`w-9 h-9 rounded-xl bg-surface-subtle/60 flex items-center justify-center ${className}`}
         aria-hidden="true"
       />
     );
@@ -53,19 +70,21 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       <button
         type="button"
         onClick={toggleTheme}
-        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-colors text-foreground/90 hover:bg-surface-subtle ${className}`}
+        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-colors text-foreground hover:bg-surface-subtle border border-transparent hover:border-surface-border ${className}`}
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       >
         <div className="flex items-center gap-3">
-          {isDark ? (
-            <Moon className="w-4 h-4 text-primary" aria-hidden="true" />
-          ) : (
-            <Sun className="w-4 h-4 text-accent" aria-hidden="true" />
-          )}
+          <div className="w-7 h-7 rounded-lg bg-surface-subtle flex items-center justify-center">
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400" aria-hidden="true" />
+            ) : (
+              <Moon className="w-4 h-4 text-primary" aria-hidden="true" />
+            )}
+          </div>
           <span>{isDark ? "Dark Theme" : "Light Theme"}</span>
         </div>
-        <span className="text-xs text-muted font-normal">
-          {isDark ? "Tap for Light" : "Tap for Dark"}
+        <span className="text-xs px-2.5 py-1 rounded-md bg-surface-subtle text-muted-foreground font-medium">
+          {isDark ? "Switch to Light" : "Switch to Dark"}
         </span>
       </button>
     );
@@ -77,13 +96,21 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className={`relative w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface-subtle transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${className}`}
+      className={`relative w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground bg-surface-subtle/50 hover:bg-surface-subtle border border-surface-border/60 hover:border-surface-border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${className}`}
     >
-      {isDark ? (
-        <Sun className="w-4 h-4 text-accent transition-transform duration-200 rotate-0 scale-100" aria-hidden="true" />
-      ) : (
-        <Moon className="w-4 h-4 text-muted-foreground hover:text-foreground transition-transform duration-200 rotate-0 scale-100" aria-hidden="true" />
-      )}
+      <div className="relative w-4 h-4 flex items-center justify-center">
+        {isDark ? (
+          <Sun
+            className="w-4 h-4 text-amber-400 transform transition-all duration-300 rotate-0 scale-100 drop-shadow-[0_0_6px_rgba(251,191,36,0.5)]"
+            aria-hidden="true"
+          />
+        ) : (
+          <Moon
+            className="w-4 h-4 text-muted-foreground hover:text-foreground transform transition-all duration-300 rotate-0 scale-100"
+            aria-hidden="true"
+          />
+        )}
+      </div>
     </button>
   );
 };

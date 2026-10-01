@@ -7,12 +7,14 @@ import { ScenarioQuestion } from "./ScenarioQuestion";
 export interface QuestionCardProps {
   question: Question;
   selectedAnswer?: number;
-  onSelectAnswer: (value: number) => void;
+  selectedOptionId?: string;
+  onSelectAnswer: (value: number, optionId: string) => void;
 }
 
 export const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
   selectedAnswer,
+  selectedOptionId,
   onSelectAnswer,
 }) => {
   return (
@@ -34,12 +36,14 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         <LikertScale
           options={question.options}
           selectedValue={selectedAnswer}
+          selectedOptionId={selectedOptionId}
           onSelect={onSelectAnswer}
         />
       ) : question.type === "scenario" ? (
         <ScenarioQuestion
           question={question}
           selectedValue={selectedAnswer}
+          selectedOptionId={selectedOptionId}
           onSelect={onSelectAnswer}
         />
       ) : question.type === "slider" ? (
@@ -61,7 +65,11 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                 ? selectedAnswer
                 : question.options[0]?.value || 0
             }
-            onChange={(e) => onSelectAnswer(Number(e.target.value))}
+            onChange={(e) => {
+              const val = Number(e.target.value);
+              const matchedOption = question.options.find((o) => o.value === val);
+              onSelectAnswer(val, matchedOption?.id || `slider_${val}`);
+            }}
             className="w-full h-3 bg-surface-subtle rounded-lg appearance-none cursor-pointer accent-primary"
             aria-label={question.title}
           />
@@ -83,7 +91,11 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
               key={option.id || option.value}
               option={option}
               index={idx}
-              isSelected={selectedAnswer === option.value}
+              isSelected={
+                selectedOptionId
+                  ? selectedOptionId === option.id
+                  : typeof selectedAnswer === "number" && selectedAnswer === option.value
+              }
               onSelect={onSelectAnswer}
             />
           ))}

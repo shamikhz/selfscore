@@ -55,7 +55,7 @@ export const AD_CONFIG: AdSystemConfig = {
     questionScreen: {
       enabled: true,
       format: "nativeCard",
-      minHeight: 120,
+      minHeight: 110,
       label: "Sponsored",
       sponsorName: "FocusCraft",
       sponsorTagline: "Mindfulness & productivity tools to sharpen your focus.",

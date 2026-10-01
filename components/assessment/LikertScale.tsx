@@ -5,12 +5,14 @@ import { AnswerOption as AnswerOptionType } from "@/types/question";
 export interface LikertScaleProps {
   options: AnswerOptionType[];
   selectedValue?: number;
-  onSelect: (value: number) => void;
+  selectedOptionId?: string;
+  onSelect: (value: number, optionId: string) => void;
 }
 
 export const LikertScale: React.FC<LikertScaleProps> = ({
   options,
   selectedValue,
+  selectedOptionId,
   onSelect,
 }) => {
   return (
@@ -20,7 +22,9 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
       className="space-y-2.5 sm:space-y-3"
     >
       {options.map((option, idx) => {
-        const isSelected = selectedValue === option.value;
+        const isSelected = selectedOptionId
+          ? selectedOptionId === option.id
+          : typeof selectedValue === "number" && selectedValue === option.value;
 
         return (
           <button
@@ -28,7 +32,7 @@ export const LikertScale: React.FC<LikertScaleProps> = ({
             type="button"
             role="radio"
             aria-checked={isSelected}
-            onClick={() => onSelect(option.value)}
+            onClick={() => onSelect(option.value, option.id)}
             className={`w-full min-h-touch px-4 py-3.5 rounded-xl text-left transition-all select-none no-select flex items-center justify-between gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.99] touch-manipulation border ${
               isSelected
                 ? "bg-primary-subtle/80 border-primary text-foreground shadow-subtle"

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, X, AlertCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, X, AlertCircle, AlertTriangle } from "lucide-react";
 import { AssessmentMeta } from "@/types/assessment";
 import { Question } from "@/types/question";
 import { ScoreTier } from "@/types/result";
@@ -39,14 +39,21 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   // Active state
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [selectedOptionIds, setSelectedOptionIds] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [validationError, setValidationError] = useState<boolean>(false);
   const [showExitModal, setShowExitModal] = useState<boolean>(false);
   const [showResumeModal, setShowResumeModal] = useState<boolean>(false);
-  const [resumeData, setResumeData] = useState<{ index: number; answers: Record<string, number> } | null>(null);
+  const [resumeData, setResumeData] = useState<{
+    index: number;
+    answers: Record<string, number>;
+    selectedOptionIds?: Record<string, string>;
+  } | null>(null);
 
   const totalQuestions = questions.length;
   const currentQuestion = questions[currentIndex];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
+  const currentOptionId = currentQuestion ? selectedOptionIds[currentQuestion.id] : undefined;
   const isCurrentAnswered = typeof currentAnswer === "number";
   const isLastQuestion = currentIndex === totalQuestions - 1;
 
@@ -58,6 +65,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
       setResumeData({
         index: validIndex,
         answers: saved.answers,
+        selectedOptionIds: saved.selectedOptionIds,
       });
       setShowResumeModal(true);
     }
@@ -66,14 +74,17 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   // Auto-save answers whenever they change
   useEffect(() => {
     if (Object.keys(answers).length > 0) {
-      saveProgress(meta.id, currentIndex, answers);
+      saveProgress(meta.id, currentIndex, answers, selectedOptionIds);
     }
-  }, [answers, currentIndex, meta.id]);
+  }, [answers, selectedOptionIds, currentIndex, meta.id]);
 
   // Resume handlers
   const handleConfirmResume = () => {
     if (resumeData) {
       setAnswers(resumeData.answers);
+      if (resumeData.selectedOptionIds) {
+        setSelectedOptionIds(resumeData.selectedOptionIds);
+      }
       setCurrentIndex(resumeData.index);
     }
     setShowResumeModal(false);
@@ -82,18 +93,24 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   const handleStartFresh = () => {
     clearProgress(meta.id);
     setAnswers({});
+    setSelectedOptionIds({});
     setCurrentIndex(0);
     setShowResumeModal(false);
   };
 
   // Answer selection handler
   const handleSelectAnswer = useCallback(
-    (value: number) => {
+    (value: number, optionId: string) => {
       if (!currentQuestion) return;
       setAnswers((prev) => ({
         ...prev,
         [currentQuestion.id]: value,
       }));
+      setSelectedOptionIds((prev) => ({
+        ...prev,
+        [currentQuestion.id]: optionId,
+      }));
+      setValidationError(false);
     },
     [currentQuestion]
   );
@@ -101,6 +118,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   // Navigation handlers
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
+      setValidationError(false);
       setCurrentIndex((prev) => prev - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -117,6 +135,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
     if (unansweredIndex !== -1) {
       // Direct user to the first missed question
       setCurrentIndex(unansweredIndex);
+      setValidationError(true);
       return;
     }
 
@@ -154,7 +173,17 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   }, [isSubmitting, questions, answers, meta.id, meta.slug, slug, tiers, onComplete, router]);
 
   const handleNext = useCallback(() => {
-    if (!isCurrentAnswered) return;
+    if (!isCurrentAnswered) {
+      setValidationError(true);
+      try {
+        if (typeof window !== "undefined" && "vibrate" in navigator) {
+          navigator.vibrate(50);
+        }
+      } catch (_) {}
+      return;
+    }
+
+    setValidationError(false);
 
     if (isLastQuestion) {
       handleFinish();
@@ -164,7 +193,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
     }
   }, [isCurrentAnswered, isLastQuestion, handleFinish]);
 
-  // Keyboard shortcut listener (Enter/Space to advance, Backspace to go back)
+  // Keyboard shortcut listener (Enter/Space to advance, Backspace/ArrowLeft to go back)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't intercept when modal is open or inside text inputs
@@ -172,10 +201,8 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
       if (["input", "textarea"].includes((e.target as HTMLElement)?.tagName?.toLowerCase())) return;
 
       if (e.key === "ArrowRight" || e.key === "Enter") {
-        if (isCurrentAnswered) {
-          e.preventDefault();
-          handleNext();
-        }
+        e.preventDefault();
+        handleNext();
       } else if (e.key === "ArrowLeft") {
         if (currentIndex > 0) {
           e.preventDefault();
@@ -186,7 +213,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isCurrentAnswered, currentIndex, handleNext, handlePrev, showExitModal, showResumeModal]);
+  }, [currentIndex, handleNext, handlePrev, showExitModal, showResumeModal]);
 
   const handleExitClick = () => {
     setShowExitModal(true);
@@ -217,9 +244,9 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   }
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between max-w-xl mx-auto px-4 py-4 sm:py-6">
+    <div className="min-h-[85vh] flex flex-col justify-between max-w-xl mx-auto px-2 sm:px-4 py-3 sm:py-6 pb-28 sm:pb-8">
       {/* Runner Top Bar */}
-      <header className="space-y-4 pb-4">
+      <header className="space-y-3 sm:space-y-4 pb-2 sm:pb-4">
         <div className="flex items-center justify-between">
           <button
             type="button"
@@ -245,43 +272,66 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
       </header>
 
       {/* Primary Question Presentation Card */}
-      <main className="flex-1 py-4 sm:py-6 space-y-4">
-        <Card variant="default" className="p-5 sm:p-7 shadow-sm">
+      <main className="flex-1 py-2 sm:py-6 space-y-4">
+        <Card
+          variant="default"
+          className={`p-4 sm:p-7 shadow-sm transition-all duration-200 ${
+            validationError ? "ring-2 ring-accent ring-offset-2" : ""
+          }`}
+        >
           <QuestionCard
             key={currentQuestion.id}
             question={currentQuestion}
             selectedAnswer={currentAnswer}
+            selectedOptionId={currentOptionId}
             onSelectAnswer={handleSelectAnswer}
           />
         </Card>
 
-        {/* Question Runner Sponsor Slot */}
-        <AdSlot placement="questionScreen" className="my-4" />
+        {/* Friendly Validation Banner if user clicks Next before choosing an option */}
+        {validationError && (
+          <div
+            role="alert"
+            className="animate-in fade-in slide-in-from-top-1 duration-200 flex items-center justify-center gap-2 p-3 rounded-xl bg-accent/10 border border-accent/30 text-accent text-xs sm:text-sm font-semibold text-center"
+          >
+            <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span>Please select an option above to continue</span>
+          </div>
+        )}
+
+        {/* Sponsor Placement above Action Buttons */}
+        <AdSlot placement="questionScreen" className="my-3" />
       </main>
 
-      {/* Thumb-Zone Fixed/Docked Navigation Controls */}
-      <footer className="pt-4 pb-2 border-t border-surface-border mt-auto">
-        <div className="flex items-center justify-between gap-3">
+      {/* Thumb-Zone Fixed Bottom Navigation Controls */}
+      <footer className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-t border-surface-border px-4 py-3 sm:py-4 pb-safe shadow-raised sm:relative sm:z-auto sm:bg-transparent sm:backdrop-blur-none sm:border-0 sm:shadow-none sm:px-0 sm:pb-0 sm:pt-4">
+        <div className="flex items-center justify-between gap-3 max-w-xl mx-auto">
+          {/* Back Button */}
           <Button
             type="button"
-            variant="ghost"
+            variant="outline"
             size="lg"
             onClick={handlePrev}
             disabled={currentIndex === 0 || isSubmitting}
-            className="flex-1 sm:flex-initial min-w-[100px]"
+            className="flex-1 sm:flex-initial min-w-[90px] h-12 text-sm sm:text-base font-medium shadow-xs bg-surface"
             aria-label="Previous question"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="w-4 h-4 mr-1.5" />
             <span>Back</span>
           </Button>
 
+          {/* Next / Complete Button */}
           <Button
             type="button"
-            variant={isLastQuestion ? "primary" : "secondary"}
+            variant={isCurrentAnswered ? "primary" : "secondary"}
             size="lg"
             onClick={handleNext}
-            disabled={!isCurrentAnswered || isSubmitting}
-            className="flex-1 min-w-[140px] font-semibold"
+            disabled={isSubmitting}
+            className={`flex-1 min-w-[150px] h-12 text-sm sm:text-base font-semibold shadow-md transition-all ${
+              isCurrentAnswered
+                ? "bg-primary text-primary-foreground shadow-primary/20 scale-[1.01]"
+                : "bg-surface-subtle text-foreground/80 border border-surface-border hover:bg-surface-subtle/80"
+            }`}
             aria-label={isLastQuestion ? "Complete assessment" : "Next question"}
           >
             {isSubmitting ? (
@@ -289,12 +339,12 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
             ) : isLastQuestion ? (
               <>
                 <span>Complete</span>
-                <CheckCircle2 className="w-4 h-4 ml-2" />
+                <CheckCircle2 className="w-4 h-4 ml-2 stroke-[2.5]" />
               </>
             ) : (
               <>
                 <span>Next</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-2 stroke-[2.5]" />
               </>
             )}
           </Button>

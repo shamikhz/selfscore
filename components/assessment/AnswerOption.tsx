@@ -5,7 +5,7 @@ import { AnswerOption as AnswerOptionType } from "@/types/question";
 export interface AnswerOptionProps {
   option: AnswerOptionType;
   isSelected: boolean;
-  onSelect: (value: number) => void;
+  onSelect: (value: number, optionId: string) => void;
   index: number;
 }
 
@@ -24,7 +24,7 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
       type="button"
       role="radio"
       aria-checked={isSelected}
-      onClick={() => onSelect(option.value)}
+      onClick={() => onSelect(option.value, option.id)}
       className={`w-full min-h-touch p-4 rounded-xl text-left transition-all select-none no-select flex items-start gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.99] touch-manipulation border ${
         isSelected
           ? "bg-primary-subtle/70 border-primary text-foreground shadow-subtle"

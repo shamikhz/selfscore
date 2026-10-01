@@ -29,10 +29,10 @@ export function buildDefaultAssessmentDefinition(meta: AssessmentMeta): Assessme
           dimension: dim,
           reversed: isReversed,
           options: [
-            { id: "opt_1", label: "I step back, evaluate the parameters, and methodically address the root cause.", value: isReversed ? 1 : 4, description: "Structured and deliberate response" },
-            { id: "opt_2", label: "I consult available references and apply established best practices.", value: isReversed ? 2 : 3, description: "Standard reliable methodology" },
-            { id: "opt_3", label: "I improvise in the moment, hoping the difficulty resolves quickly.", value: isReversed ? 3 : 2, description: "Reactive adaptation" },
-            { id: "opt_4", label: "I feel overwhelmed and tend to delay taking decisive steps.", value: isReversed ? 4 : 1, description: "Hesitant or avoidance response" },
+            { id: `${meta.id}_q${qIndex}_opt_1`, label: "I step back, evaluate the parameters, and methodically address the root cause.", value: isReversed ? 1 : 4, description: "Structured and deliberate response" },
+            { id: `${meta.id}_q${qIndex}_opt_2`, label: "I consult available references and apply established best practices.", value: isReversed ? 2 : 3, description: "Standard reliable methodology" },
+            { id: `${meta.id}_q${qIndex}_opt_3`, label: "I improvise in the moment, hoping the difficulty resolves quickly.", value: isReversed ? 3 : 2, description: "Reactive adaptation" },
+            { id: `${meta.id}_q${qIndex}_opt_4`, label: "I feel overwhelmed and tend to delay taking decisive steps.", value: isReversed ? 4 : 1, description: "Hesitant or avoidance response" },
           ],
         });
       } else if (qIndex % 3 === 0) {
@@ -45,10 +45,10 @@ export function buildDefaultAssessmentDefinition(meta: AssessmentMeta): Assessme
           dimension: dim,
           reversed: isReversed,
           options: [
-            { id: "freq_1", label: "Rarely or never", value: isReversed ? 4 : 1 },
-            { id: "freq_2", label: "Occasionally when problems arise", value: isReversed ? 3 : 2 },
-            { id: "freq_3", label: "Regularly as part of my routine", value: isReversed ? 2 : 3 },
-            { id: "freq_4", label: "Consistently with proactive tracking", value: isReversed ? 1 : 4 },
+            { id: `${meta.id}_q${qIndex}_freq_1`, label: "Rarely or never", value: isReversed ? 4 : 1 },
+            { id: `${meta.id}_q${qIndex}_freq_2`, label: "Occasionally when problems arise", value: isReversed ? 3 : 2 },
+            { id: `${meta.id}_q${qIndex}_freq_3`, label: "Regularly as part of my routine", value: isReversed ? 2 : 3 },
+            { id: `${meta.id}_q${qIndex}_freq_4`, label: "Consistently with proactive tracking", value: isReversed ? 1 : 4 },
           ],
         });
       } else {
@@ -63,11 +63,11 @@ export function buildDefaultAssessmentDefinition(meta: AssessmentMeta): Assessme
           dimension: dim,
           reversed: isReversed,
           options: [
-            { id: "likert_1", label: "Strongly Disagree", value: 1 },
-            { id: "likert_2", label: "Disagree", value: 2 },
-            { id: "likert_3", label: "Neutral", value: 3 },
-            { id: "likert_4", label: "Agree", value: 4 },
-            { id: "likert_5", label: "Strongly Agree", value: 5 },
+            { id: `${meta.id}_q${qIndex}_likert_1`, label: "Strongly Disagree", value: 1 },
+            { id: `${meta.id}_q${qIndex}_likert_2`, label: "Disagree", value: 2 },
+            { id: `${meta.id}_q${qIndex}_likert_3`, label: "Neutral", value: 3 },
+            { id: `${meta.id}_q${qIndex}_likert_4`, label: "Agree", value: 4 },
+            { id: `${meta.id}_q${qIndex}_likert_5`, label: "Strongly Agree", value: 5 },
           ],
         });
       }

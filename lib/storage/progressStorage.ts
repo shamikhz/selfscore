@@ -2,6 +2,7 @@ export interface AssessmentProgress {
   assessmentId: string;
   currentQuestionIndex: number;
   answers: Record<string, number>; // { [questionId]: optionValue }
+  selectedOptionIds?: Record<string, string>; // { [questionId]: optionId }
   updatedAt: string; // ISO 8601
 }
 
@@ -13,7 +14,8 @@ const PROGRESS_PREFIX = "selfscore_progress_";
 export function saveProgress(
   assessmentId: string,
   currentQuestionIndex: number,
-  answers: Record<string, number>
+  answers: Record<string, number>,
+  selectedOptionIds?: Record<string, string>
 ): void {
   if (typeof window === "undefined") return;
   try {
@@ -21,6 +23,7 @@ export function saveProgress(
       assessmentId,
       currentQuestionIndex,
       answers,
+      selectedOptionIds,
       updatedAt: new Date().toISOString(),
     };
     localStorage.setItem(`${PROGRESS_PREFIX}${assessmentId}`, JSON.stringify(data));
