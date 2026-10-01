@@ -64,41 +64,39 @@ export default function RootLayout({
         {/* Main Content Landmark */}
         <main
           id="main-content"
-          className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-12"
+          className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-6 sm:pb-12"
         >
           {children}
         </main>
 
-        {/* Universal Footer (Visible on Mobile, Tablet & Desktop) */}
-        <footer className="border-t border-surface-border bg-surface py-8 pb-28 sm:pb-8 text-xs text-muted">
+        {/* Universal Footer (Prominently Visible on Mobile, Tablet & Desktop) */}
+        <footer className="w-full border-t border-surface-border bg-surface-subtle/80 sm:bg-surface py-8 pb-28 sm:pb-8 text-xs text-muted mt-8">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
             <div>
-              <p className="font-semibold text-foreground text-sm sm:text-xs">
+              <p className="font-bold text-foreground text-sm">
                 SelfScore Assessment Platform
               </p>
-              <p className="mt-1 text-muted-foreground text-xs max-w-sm sm:max-w-none">
+              <p className="mt-0.5 text-muted-foreground text-xs max-w-sm sm:max-w-none">
                 Informal self-discovery & personal reflection. Not a clinical diagnosis.
               </p>
             </div>
 
-            <nav aria-label="Footer Navigation" className="flex flex-wrap justify-center items-center gap-3 sm:gap-5 pt-2 sm:pt-0">
+            <nav aria-label="Footer Navigation" className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 pt-1 sm:pt-0">
               <Link
                 href="/about"
-                className="py-1 px-2.5 rounded-md hover:text-foreground hover:bg-surface-subtle transition-colors text-xs font-medium text-foreground/80"
+                className="py-1.5 px-3 rounded-lg bg-surface sm:bg-transparent border border-surface-border sm:border-transparent text-foreground/90 hover:text-primary hover:bg-surface-subtle transition-colors text-xs font-medium shadow-xs sm:shadow-none"
               >
                 About
               </Link>
-              <span className="text-surface-border hidden sm:inline" aria-hidden="true">•</span>
               <Link
                 href="/privacy"
-                className="py-1 px-2.5 rounded-md hover:text-foreground hover:bg-surface-subtle transition-colors text-xs font-medium text-foreground/80"
+                className="py-1.5 px-3 rounded-lg bg-surface sm:bg-transparent border border-surface-border sm:border-transparent text-foreground/90 hover:text-primary hover:bg-surface-subtle transition-colors text-xs font-medium shadow-xs sm:shadow-none"
               >
                 Privacy Policy
               </Link>
-              <span className="text-surface-border hidden sm:inline" aria-hidden="true">•</span>
               <Link
                 href="/terms"
-                className="py-1 px-2.5 rounded-md hover:text-foreground hover:bg-surface-subtle transition-colors text-xs font-medium text-foreground/80"
+                className="py-1.5 px-3 rounded-lg bg-surface sm:bg-transparent border border-surface-border sm:border-transparent text-foreground/90 hover:text-primary hover:bg-surface-subtle transition-colors text-xs font-medium shadow-xs sm:shadow-none"
               >
                 Terms of Service
               </Link>

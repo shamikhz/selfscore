@@ -1,17 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, History, Sparkles, Info, Home } from "lucide-react";
+import { Compass, History, Sparkles, Info, Shield, FileText, Menu, X, Home } from "lucide-react";
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { href: "/explore", label: "Explore", icon: Compass },
     { href: "/results", label: "My Results", icon: History },
     { href: "/about", label: "About", icon: Info },
+  ];
+
+  const mobileLinks = [
+    { href: "/", label: "Home", icon: Home },
+    { href: "/explore", label: "Explore All Tests", icon: Compass },
+    { href: "/results", label: "My Results", icon: History },
+    { href: "/about", label: "About Platform", icon: Info },
+    { href: "/privacy", label: "Privacy Policy", icon: Shield },
+    { href: "/terms", label: "Terms of Service", icon: FileText },
   ];
 
   return (
@@ -20,6 +30,7 @@ export const Header: React.FC = () => {
         {/* Brand Logo & Name */}
         <Link
           href="/"
+          onClick={() => setMobileMenuOpen(false)}
           className="flex items-center gap-2.5 text-foreground font-semibold text-base sm:text-lg tracking-tight hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md p-1"
         >
           <div className="w-8 h-8 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-subtle">
@@ -52,7 +63,47 @@ export const Header: React.FC = () => {
             );
           })}
         </nav>
+
+        {/* Mobile Menu Toggle Button */}
+        <button
+          type="button"
+          aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          className="sm:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-surface-subtle transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          {mobileMenuOpen ? (
+            <X className="w-5 h-5 text-foreground" aria-hidden="true" />
+          ) : (
+            <Menu className="w-5 h-5" aria-hidden="true" />
+          )}
+        </button>
       </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="sm:hidden bg-surface border-b border-surface-border shadow-raised px-4 py-3 space-y-1 animate-in slide-in-from-top-2 duration-200">
+          {mobileLinks.map((link) => {
+            const Icon = link.icon;
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-primary-subtle/80 text-primary font-semibold"
+                    : "text-foreground/90 hover:bg-surface-subtle"
+                }`}
+              >
+                <Icon className={`w-4 h-4 ${isActive ? "text-primary" : "text-muted"}`} aria-hidden="true" />
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </header>
   );
 };
