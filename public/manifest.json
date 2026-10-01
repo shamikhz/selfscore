@@ -1,0 +1,46 @@
+{
+  "name": "SelfScore — Thoughtful Self-Assessments",
+  "short_name": "SelfScore",
+  "description": "Mobile-first, private assessments for cognitive patterns, personality, productivity, stress, and habits. 100% local, no login required.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fafaf9",
+  "theme_color": "#1e3a8a",
+  "categories": ["education", "health", "productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Explore All Assessments",
+      "short_name": "Explore",
+      "url": "/explore",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Saved Results",
+      "short_name": "Results",
+      "url": "/results",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
