@@ -38,12 +38,12 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
           className="w-full flex flex-col justify-between p-4 rounded-xl border border-surface-border bg-surface-subtle/80 hover:bg-surface-subtle transition-colors shadow-subtle text-left"
         >
           <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-surface border border-surface-border">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-surface border border-surface-border">
               <Sparkles className="w-2.5 h-2.5 text-accent" aria-hidden="true" />
               <span>{label}</span>
             </span>
 
-            <span className="text-[11px] text-muted flex items-center gap-1 font-medium">
+            <span className="text-xs text-muted flex items-center gap-1 font-medium">
               <span>Partner</span>
               <ExternalLink className="w-3 h-3" aria-hidden="true" />
             </span>
@@ -58,7 +58,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
             </p>
           </div>
 
-          <div className="mt-3 pt-2 border-t border-surface-border/60 flex items-center justify-between text-[11px] text-muted">
+          <div className="mt-3 pt-2 border-t border-surface-border/60 flex items-center justify-between text-xs text-muted">
             <span>Non-intrusive sponsor notice</span>
             <span className="text-primary font-medium hover:underline cursor-pointer">
               Learn more →

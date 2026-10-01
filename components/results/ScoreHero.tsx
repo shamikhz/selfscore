@@ -80,7 +80,7 @@ export const ScoreHero: React.FC<ScoreHeroProps> = ({ result, assessmentTitle })
             >
               {score}
             </span>
-            <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
               out of 100
             </span>
           </div>

@@ -40,7 +40,7 @@ export const AssessmentIntro: React.FC<AssessmentIntroProps> = ({ assessment }) 
             <Clock className="w-4 h-4" aria-hidden="true" />
           </div>
           <div>
-            <div className="text-[11px] text-muted">Estimated time</div>
+            <div className="text-xs text-muted">Estimated time</div>
             <div className="text-sm font-semibold text-foreground">
               {assessment.estimatedDuration}
             </div>
@@ -52,7 +52,7 @@ export const AssessmentIntro: React.FC<AssessmentIntroProps> = ({ assessment }) 
             <HelpCircle className="w-4 h-4" aria-hidden="true" />
           </div>
           <div>
-            <div className="text-[11px] text-muted">Total Questions</div>
+            <div className="text-xs text-muted">Total Questions</div>
             <div className="text-sm font-semibold text-foreground">
               {assessment.questionCount} Questions
             </div>
@@ -64,7 +64,7 @@ export const AssessmentIntro: React.FC<AssessmentIntroProps> = ({ assessment }) 
             <ShieldCheck className="w-4 h-4" aria-hidden="true" />
           </div>
           <div>
-            <div className="text-[11px] text-muted">Privacy</div>
+            <div className="text-xs text-muted">Privacy</div>
             <div className="text-sm font-semibold text-foreground">
               100% Local / No Login
             </div>

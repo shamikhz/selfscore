@@ -83,7 +83,7 @@ export default function HomePage() {
                 className="p-6 sm:p-7 space-y-4 relative overflow-hidden border-primary/20 shadow-raised"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] uppercase font-bold tracking-wider text-primary flex items-center gap-1.5">
+                  <span className="text-xs uppercase font-bold tracking-wider text-primary flex items-center gap-1.5">
                     <Brain className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>Featured Spotlight</span>
                   </span>
@@ -167,7 +167,7 @@ export default function HomePage() {
                     {cat.description}
                   </p>
                 </div>
-                <div className="mt-3 flex items-center text-[11px] font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="mt-3 flex items-center text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                   <span>Explore →</span>
                 </div>
               </Card>

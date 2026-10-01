@@ -52,7 +52,7 @@ export const BottomNav: React.FC = () => {
                   aria-hidden="true"
                 />
               </div>
-              <span className="text-[11px] mt-0.5 tracking-tight">
+              <span className="text-xs mt-0.5 tracking-tight font-medium">
                 {item.label}
               </span>
             </Link>

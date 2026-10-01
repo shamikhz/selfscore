@@ -65,7 +65,7 @@ export const RecentResults: React.FC = () => {
                   <Badge variant="primary" size="sm">
                     Score: {result.score}
                   </Badge>
-                  <span className="text-[11px] text-muted truncate">
+                  <span className="text-xs text-muted truncate">
                     {result.tier.label}
                   </span>
                 </div>
