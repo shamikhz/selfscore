@@ -23,6 +23,9 @@ export interface AdSystemConfig {
     resultsTop: AdPlacementConfig;
     resultsMiddle: AdPlacementConfig;
     resultsBottom: AdPlacementConfig;
+    questionBanner: AdPlacementConfig;
+    questionSidebarLeft: AdPlacementConfig;
+    questionSidebarRight: AdPlacementConfig;
   };
 }
 
@@ -62,6 +65,30 @@ export const AD_CONFIG: AdSystemConfig = {
       label: "Sponsored",
       sponsorName: "FocusCraft",
       sponsorTagline: "Mindfulness & productivity tools to sharpen your focus.",
+    },
+    questionBanner: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 90,
+      label: "Sponsored Banner",
+      sponsorName: "FocusCraft Tools",
+      sponsorTagline: "Elevate daily focus with evidence-based cognitive routines.",
+    },
+    questionSidebarLeft: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 250,
+      label: "Partner Feature",
+      sponsorName: "DeepHabits App",
+      sponsorTagline: "Turn reflection into daily action with structured goal tracking.",
+    },
+    questionSidebarRight: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 250,
+      label: "Sponsored Tool",
+      sponsorName: "Mindful Workspace",
+      sponsorTagline: "Distraction-free environment for deep analytical thinking.",
     },
     resultsMain: {
       enabled: true,

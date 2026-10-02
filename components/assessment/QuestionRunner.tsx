@@ -244,112 +244,130 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   }
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between max-w-xl mx-auto px-2 sm:px-4 py-3 sm:py-6 pb-32 sm:pb-8">
-      {/* Runner Top Bar */}
-      <header className="space-y-3 sm:space-y-4 pb-2 sm:pb-4">
-        <div className="flex items-center justify-between">
-          <button
-            type="button"
-            onClick={handleExitClick}
-            className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors p-1.5 -ml-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label="Exit assessment"
-          >
-            <X className="w-4 h-4" />
-            <span>Save & Exit</span>
-          </button>
+    <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
+      <div className="flex items-start justify-center gap-6">
+        {/* Left Sidebar Ad (Desktop view: visible on lg screens) */}
+        <aside className="hidden lg:block w-64 xl:w-72 shrink-0 sticky top-6">
+          <AdSlot placement="questionSidebarLeft" className="my-0" />
+        </aside>
 
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground truncate max-w-[200px]">
-            {meta.title}
-          </span>
-        </div>
+        {/* Center Container: Primary Question Runner */}
+        <div className="flex-1 max-w-xl mx-auto w-full min-h-[85vh] flex flex-col justify-between pb-32 sm:pb-8">
+          {/* Runner Top Bar */}
+          <header className="space-y-3 sm:space-y-4 pb-2 sm:pb-4">
+            <div className="flex items-center justify-between">
+              <button
+                type="button"
+                onClick={handleExitClick}
+                className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors p-1.5 -ml-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Exit assessment"
+              >
+                <X className="w-4 h-4" />
+                <span>Save & Exit</span>
+              </button>
 
-        {/* Progress bar & question counter */}
-        <QuestionProgress
-          currentIndex={currentIndex}
-          totalQuestions={totalQuestions}
-          dimension={currentQuestion.dimension}
-        />
-      </header>
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground truncate max-w-[200px]">
+                {meta.title}
+              </span>
+            </div>
 
-      {/* Primary Question Presentation Card */}
-      <main className="flex-1 py-2 sm:py-4 space-y-4">
-        <Card
-          variant="default"
-          className={`p-4 sm:p-7 shadow-sm transition-all duration-200 ${
-            validationError ? "ring-2 ring-accent ring-offset-2" : ""
-          }`}
-        >
-          <QuestionCard
-            key={currentQuestion.id}
-            question={currentQuestion}
-            selectedAnswer={currentAnswer}
-            selectedOptionId={currentOptionId}
-            onSelectAnswer={handleSelectAnswer}
-          />
-        </Card>
+            {/* Progress bar & question counter */}
+            <QuestionProgress
+              currentIndex={currentIndex}
+              totalQuestions={totalQuestions}
+              dimension={currentQuestion.dimension}
+            />
 
-        {/* Friendly Validation Banner if user clicks Next before choosing an option */}
-        {validationError && (
-          <div
-            role="alert"
-            className="animate-in fade-in slide-in-from-top-1 duration-200 flex items-center justify-center gap-2 p-3 rounded-xl bg-accent/10 border border-accent/30 text-accent text-xs sm:text-sm font-semibold text-center"
-          >
-            <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <span>Please select an option above to continue</span>
-          </div>
-        )}
+            {/* Mobile Banner Ad (Visible below header on mobile view < lg) */}
+            <AdSlot placement="questionBanner" className="lg:hidden my-2" />
+          </header>
 
-        {/* Ad Placement: Positioned directly above the navigation buttons */}
-        <AdSlot placement="questionScreen" className="my-3 sm:my-4" />
-      </main>
+          {/* Primary Question Presentation Card */}
+          <main className="flex-1 py-2 sm:py-4 space-y-4">
+            <Card
+              variant="default"
+              className={`p-4 sm:p-7 shadow-sm transition-all duration-200 ${
+                validationError ? "ring-2 ring-accent ring-offset-2" : ""
+              }`}
+            >
+              <QuestionCard
+                key={currentQuestion.id}
+                question={currentQuestion}
+                selectedAnswer={currentAnswer}
+                selectedOptionId={currentOptionId}
+                onSelectAnswer={handleSelectAnswer}
+              />
+            </Card>
 
-      {/* Thumb-Zone Fixed Bottom Navigation Controls */}
-      <footer className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-t border-surface-border px-4 py-3 sm:py-4 pb-safe shadow-raised sm:relative sm:z-auto sm:bg-transparent sm:backdrop-blur-none sm:border-0 sm:shadow-none sm:px-0 sm:pb-0 sm:pt-4">
-        <div className="flex items-center justify-between gap-3 max-w-xl mx-auto">
-          {/* Back Button */}
-          <Button
-            type="button"
-            variant="outline"
-            size="lg"
-            onClick={handlePrev}
-            disabled={currentIndex === 0 || isSubmitting}
-            className="flex-1 sm:flex-initial min-w-[90px] h-12 text-sm sm:text-base font-medium shadow-xs bg-surface"
-            aria-label="Previous question"
-          >
-            <ArrowLeft className="w-4 h-4 mr-1.5" />
-            <span>Back</span>
-          </Button>
-
-          {/* Next / Complete Button */}
-          <Button
-            type="button"
-            variant={isCurrentAnswered ? "primary" : "secondary"}
-            size="lg"
-            onClick={handleNext}
-            disabled={isSubmitting}
-            className={`flex-1 min-w-[150px] h-12 text-sm sm:text-base font-semibold shadow-md transition-all ${
-              isCurrentAnswered
-                ? "bg-primary text-primary-foreground shadow-primary/20 scale-[1.01]"
-                : "bg-surface-subtle text-foreground/80 border border-surface-border hover:bg-surface-subtle/80"
-            }`}
-            aria-label={isLastQuestion ? "Complete assessment" : "Next question"}
-          >
-            {isSubmitting ? (
-              <span>Calculating...</span>
-            ) : isLastQuestion ? (
-              <>
-                <span>Complete</span>
-                <CheckCircle2 className="w-4 h-4 ml-2 stroke-[2.5]" />
-              </>
-            ) : (
-              <>
-                <span>Next</span>
-                <ArrowRight className="w-4 h-4 ml-2 stroke-[2.5]" />
-              </>
+            {/* Friendly Validation Banner if user clicks Next before choosing an option */}
+            {validationError && (
+              <div
+                role="alert"
+                className="animate-in fade-in slide-in-from-top-1 duration-200 flex items-center justify-center gap-2 p-3 rounded-xl bg-accent/10 border border-accent/30 text-accent text-xs sm:text-sm font-semibold text-center"
+              >
+                <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
+                <span>Please select an option above to continue</span>
+              </div>
             )}
-          </Button>
+
+            {/* Ad Placement: Positioned directly above the navigation buttons */}
+            <AdSlot placement="questionScreen" className="my-3 sm:my-4" />
+          </main>
+
+          {/* Thumb-Zone Fixed Bottom Navigation Controls */}
+          <footer className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-t border-surface-border px-4 py-3 sm:py-4 pb-safe shadow-raised sm:relative sm:z-auto sm:bg-transparent sm:backdrop-blur-none sm:border-0 sm:shadow-none sm:px-0 sm:pb-0 sm:pt-4">
+            <div className="flex items-center justify-between gap-3 max-w-xl mx-auto">
+              {/* Back Button */}
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={handlePrev}
+                disabled={currentIndex === 0 || isSubmitting}
+                className="flex-1 sm:flex-initial min-w-[90px] h-12 text-sm sm:text-base font-medium shadow-xs bg-surface"
+                aria-label="Previous question"
+              >
+                <ArrowLeft className="w-4 h-4 mr-1.5" />
+                <span>Back</span>
+              </Button>
+
+              {/* Next / Complete Button */}
+              <Button
+                type="button"
+                variant={isCurrentAnswered ? "primary" : "secondary"}
+                size="lg"
+                onClick={handleNext}
+                disabled={isSubmitting}
+                className={`flex-1 min-w-[150px] h-12 text-sm sm:text-base font-semibold shadow-md transition-all ${
+                  isCurrentAnswered
+                    ? "bg-primary text-primary-foreground shadow-primary/20 scale-[1.01]"
+                    : "bg-surface-subtle text-foreground/80 border border-surface-border hover:bg-surface-subtle/80"
+                }`}
+                aria-label={isLastQuestion ? "Complete assessment" : "Next question"}
+              >
+                {isSubmitting ? (
+                  <span>Calculating...</span>
+                ) : isLastQuestion ? (
+                  <>
+                    <span>Complete</span>
+                    <CheckCircle2 className="w-4 h-4 ml-2 stroke-[2.5]" />
+                  </>
+                ) : (
+                  <>
+                    <span>Next</span>
+                    <ArrowRight className="w-4 h-4 ml-2 stroke-[2.5]" />
+                  </>
+                )}
+              </Button>
+            </div>
+          </footer>
         </div>
-      </footer>
+
+        {/* Right Sidebar Ad (Desktop view: visible on lg screens) */}
+        <aside className="hidden lg:block w-64 xl:w-72 shrink-0 sticky top-6">
+          <AdSlot placement="questionSidebarRight" className="my-0" />
+        </aside>
+      </div>
 
       {/* Resume In-Progress Modal */}
       <Modal
