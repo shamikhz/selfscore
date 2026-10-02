@@ -36,7 +36,7 @@ export default function ExplorePage() {
           Explore Assessments
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground mt-1">
-          Discover all 14 personal reflection assessments organized by life domain.
+          Discover all {ASSESSMENTS_CATALOG.length} personal reflection assessments organized by life domain.
         </p>
       </div>
 
@@ -74,7 +74,7 @@ export default function ExplorePage() {
               : "bg-surface border border-surface-border text-muted-foreground hover:text-foreground hover:bg-surface-subtle"
           }`}
         >
-          All (14)
+          All ({ASSESSMENTS_CATALOG.length})
         </button>
 
         {CATEGORIES.map((cat) => {

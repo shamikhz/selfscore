@@ -31,7 +31,7 @@
     <priority>0.5</priority>
   </url>
 
-  <!-- 14 Assessment Hub Pages -->
+  <!-- 20 Assessment Hub Pages -->
   <url>
     <loc>https://selfscore.pages.dev/assessment/iq</loc>
     <changefreq>monthly</changefreq>
@@ -99,6 +99,36 @@
   </url>
   <url>
     <loc>https://selfscore.pages.dev/assessment/spending-habits</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://selfscore.pages.dev/assessment/emotional-intelligence</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://selfscore.pages.dev/assessment/decision-making</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://selfscore.pages.dev/assessment/burnout-risk</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://selfscore.pages.dev/assessment/confidence</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://selfscore.pages.dev/assessment/focus-attention</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://selfscore.pages.dev/assessment/goal-achievement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

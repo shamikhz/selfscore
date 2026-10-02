@@ -1,20 +1,20 @@
 # SelfScore — Mobile-First Assessment PWA
 
-> **SelfScore** is a production-grade, privacy-first progressive web application (PWA) delivering 14 evidence-inspired self-assessments across cognitive reasoning, personality, productivity, wellness, relationships, and financial mindset.
+> **SelfScore** is a production-grade, privacy-first progressive web application (PWA) delivering 20 evidence-inspired self-assessments across cognitive reasoning, personality, productivity, wellness, relationships, and financial mindset.
 
 ---
 
 ## 🎯 Architectural Highlights
 
 1. **Unified Assessment Engine (`/lib/assessment-engine/`):**
-   - Single calculation pipeline for all 14 assessments.
+   - Single calculation pipeline for all 20 assessments.
    - Dynamic Likert, frequency, scenario, and slider question handling.
    - Normalized 0–100 dimension scoring with automatic reverse-score inversion (`minVal + maxVal - rawVal`).
    - Algorithmic tier resolution and personalized multi-point insight synthesis.
 
 2. **Modular Configuration-Driven Domain Architecture (`/assessments/<slug>/`):**
    - Each assessment is fully self-contained with:
-     - `questions.ts`: 20 structured questions progressing from general principles to behavioral choices to high-stakes situational dilemmas.
+     - `questions.ts`: Exactly 20 structured questions progressing from self-awareness to behavioral choices to high-stakes situational dilemmas.
      - `scoring.ts`: Calibrated scoring tier bands with custom theme tokens.
      - `insights.ts`: Domain-specific insight resolvers producing personalized narrative breakdowns, strengths, growth areas, and next steps.
      - `config.ts`: Strongly typed `AssessmentDefinition` registered in [`assessments/registry.ts`](file:///c:/Users/shami/OneDrive/Desktop/assessment-pwa/assessments/registry.ts).
@@ -37,14 +37,14 @@
 
 ---
 
-## 📋 The 14 Self-Assessments
+## 📋 The 20 Self-Assessments
 
 | Slug | Assessment Title | Category | Dimensions Measured |
 | :--- | :--- | :--- | :--- |
 | `iq` | **Cognitive Pattern & Logic** | Mind | Pattern Recognition, Deductive Reasoning, Spatial Logic, Working Memory |
-| `personality` | **Five-Factor Personality Profile** | Personality | Openness, Conscientiousness, Extraversion, Agreeableness, Emotional Stability |
+| `personality` | **Five-Factor Personality Profile** | Mind | Openness, Conscientiousness, Social Energy, Empathy, Resilience |
 | `stress` | **Stress & Resilience Index** | Wellbeing | Cognitive Load, Somatic Tension, Emotional Exhaustion, Recovery Reserve |
-| `productivity` | **Deep Work & Flow Profile** | Productivity | Deep Focus, Task Velocity, Distraction Shield, Energy Alignment |
+| `productivity` | **Deep Work & Flow Profile** | Productivity | Goal Clarity, Distraction Control, Execution Stamina, System Consistency |
 | `sleep` | **Sleep Hygiene & Alertness** | Wellbeing | Circadian Consistency, Evening Wind-Down, Sleep Quality, Morning Alertness |
 | `financial-health` | **Financial Health & Mindset** | Finance | Budget Discipline, Safety Buffer, Debt Management, Future Planning |
 | `risk-tolerance` | **Financial Risk Tolerance** | Finance | Loss Aversion, Volatility Comfort, Time Horizon, Calculated Risk Taking |
@@ -55,6 +55,12 @@
 | `learning-style` | **Learning & Cognitive Preferences** | Mind | Visual Synthesis, Applied Practice, Auditory & Dialogue, Conceptual Frameworks |
 | `time-management` | **Time Allocation & Pacing Score** | Productivity | Priority Setting, Procrastination Shield, Time Estimation, Buffer Discipline |
 | `spending-habits` | **Spending Habits & Impulse Control** | Finance | Impulse Control, Value Alignment, Comparison Shopping, Emotional Spending |
+| `emotional-intelligence` | **Emotional Intelligence Score** | Mind | Self-Awareness, Emotional Regulation, Empathy, Social Awareness, Relationship Management |
+| `decision-making` | **Decision-Making Style Score** | Mind | Analytical Thinking, Decisiveness, Risk Awareness, Intuition, Reflection |
+| `burnout-risk` | **Burnout Risk & Energy Indicator** | Wellbeing | Energy & Exhaustion, Workload Pressure, Recovery, Boundaries, Motivation |
+| `confidence` | **Confidence & Self-Esteem Indicator** | Mind | Self-Belief, Assertiveness, Self-Acceptance, Resilience, Social Confidence |
+| `focus-attention` | **Focus & Attention Score** | Productivity | Sustained Attention, Distraction Control, Task Switching, Environment Management, Deep Work |
+| `goal-achievement` | **Goal Achievement & Execution Score** | Productivity | Goal Clarity, Planning, Consistency, Execution, Follow-Through |
 
 ---
 

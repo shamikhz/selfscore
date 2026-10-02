@@ -1,16 +1,8 @@
-import { AssessmentDefinition } from "@/types/assessment";
-import { getAssessmentBySlug } from "@/lib/assessments-catalog";
 import { personalityQuestions } from "./questions";
 import { personalityTiers } from "./scoring";
 import { resolvePersonalityInsights } from "./insights";
 
-const baseMeta = getAssessmentBySlug("personality")!;
-
-export const personalityAssessmentDefinition: AssessmentDefinition = {
-  meta: {
-    ...baseMeta,
-    questionCount: personalityQuestions.length,
-  },
+export const personalityAssessmentDefinition = {
   questions: personalityQuestions,
   tiers: personalityTiers,
   resolveInsights: resolvePersonalityInsights,

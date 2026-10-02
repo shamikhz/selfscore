@@ -271,6 +271,9 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
         />
       </header>
 
+      {/* Sponsor Placement below header */}
+      <AdSlot placement="questionScreen" className="my-2" />
+
       {/* Primary Question Presentation Card */}
       <main className="flex-1 py-2 sm:py-6 space-y-4">
         <Card
@@ -298,9 +301,6 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
             <span>Please select an option above to continue</span>
           </div>
         )}
-
-        {/* Sponsor Placement above Action Buttons */}
-        <AdSlot placement="questionScreen" className="my-3" />
       </main>
 
       {/* Thumb-Zone Fixed Bottom Navigation Controls */}

@@ -95,7 +95,7 @@ export default function AboutPage() {
       <div className="p-6 rounded-2xl bg-surface border border-surface-border text-center space-y-4">
         <h3 className="text-lg font-semibold text-foreground">Start Your Reflection</h3>
         <p className="text-sm text-muted-foreground max-w-md mx-auto">
-          Explore our collection of 14 assessments across mind, wellbeing, productivity,
+          Explore our collection of 20 assessments across mind, wellbeing, productivity,
           finance, and relationships.
         </p>
         <Link href="/explore">

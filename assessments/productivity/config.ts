@@ -1,16 +1,8 @@
-import { AssessmentDefinition } from "@/types/assessment";
-import { getAssessmentBySlug } from "@/lib/assessments-catalog";
 import { productivityQuestions } from "./questions";
 import { productivityTiers } from "./scoring";
 import { resolveProductivityInsights } from "./insights";
 
-const baseMeta = getAssessmentBySlug("productivity")!;
-
-export const productivityAssessmentDefinition: AssessmentDefinition = {
-  meta: {
-    ...baseMeta,
-    questionCount: productivityQuestions.length,
-  },
+export const productivityAssessmentDefinition = {
   questions: productivityQuestions,
   tiers: productivityTiers,
   resolveInsights: resolveProductivityInsights,

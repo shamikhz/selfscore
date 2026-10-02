@@ -28,7 +28,7 @@ export default function HomePage() {
           <div className="lg:col-span-7 text-center sm:text-left space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-subtle border border-primary/20 text-primary text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>14 Evidence-Inspired Self-Assessments</span>
+              <span>{ASSESSMENTS_CATALOG.length} Evidence-Inspired Self-Assessments</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.15]">
@@ -45,7 +45,7 @@ export default function HomePage() {
               <Link href="/explore">
                 <Button size="lg" variant="primary" className="font-semibold shadow-sm">
                   <Compass className="w-4 h-4 mr-2" aria-hidden="true" />
-                  <span>Browse All 14 Tests</span>
+                  <span>Browse All {ASSESSMENTS_CATALOG.length} Tests</span>
                 </Button>
               </Link>
               {heroAssessment && (
@@ -176,6 +176,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Zero-CLS Pre-Allocated Ad Placement above Popular Assessments */}
+      <AdSlot placement="home" className="my-6" />
+
       {/* Popular Assessments Grid (3-column layout on desktop) */}
       <section aria-labelledby="popular-heading" className="space-y-4">
         <div className="flex items-center justify-between">
@@ -194,7 +197,7 @@ export default function HomePage() {
             href="/explore"
             className="text-xs sm:text-sm font-semibold text-primary hover:underline shrink-0"
           >
-            View all 14 →
+            View all {ASSESSMENTS_CATALOG.length} →
           </Link>
         </div>
 
@@ -205,26 +208,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Zero-CLS Pre-Allocated Ad Placement */}
-      <AdSlot placement="home" />
-
       {/* Explore All CTA Banner */}
       <section className="p-8 sm:p-12 rounded-2xl bg-surface border border-surface-border text-center space-y-4 shadow-subtle">
         <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
           Ready to discover your profile?
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto leading-relaxed">
-          Access all 14 assessments covering cognitive agility, deep focus, stress resilience,
+          Access all {ASSESSMENTS_CATALOG.length} assessments covering cognitive agility, deep focus, stress resilience,
           and relational communication.
         </p>
         <div className="pt-2">
           <Link href="/explore">
             <Button size="lg" variant="primary" className="font-semibold shadow-sm">
-              Explore All 14 Assessments
+              Explore All {ASSESSMENTS_CATALOG.length} Assessments
             </Button>
           </Link>
         </div>
       </section>
+
+      {/* Ad Placement Above Homepage Footer */}
+      <AdSlot placement="home" className="my-6" />
     </div>
   );
 }

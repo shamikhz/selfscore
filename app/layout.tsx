@@ -5,7 +5,6 @@ import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/navigation/Footer";
 import { BottomNav } from "@/components/navigation/BottomNav";
 import { PwaRegister } from "@/components/PwaRegister";
-import { InstallPrompt } from "@/components/pwa/InstallPrompt";
 
 export const metadata: Metadata = {
   title: {
@@ -95,9 +94,6 @@ export default function RootLayout({
 
         {/* Offline PWA Service Worker Hook */}
         <PwaRegister />
-
-        {/* Mobile Install App Prompt */}
-        <InstallPrompt />
       </body>
     </html>
   );
