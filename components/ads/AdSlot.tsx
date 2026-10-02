@@ -26,10 +26,9 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
     <aside
       aria-label={label}
       role="complementary"
-      className={`w-full max-w-xl mx-auto my-6 px-1 ${className}`}
+      className={`w-full max-w-xl mx-auto my-4 px-1 ${className}`}
       style={{
         minHeight: `${minHeight}px`,
-        contain: "layout size", // Guarantees zero Cumulative Layout Shift (CLS = 0)
       }}
     >
       {format === "nativeCard" ? (

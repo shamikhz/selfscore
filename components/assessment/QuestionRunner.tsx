@@ -244,7 +244,7 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
   }
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between max-w-xl mx-auto px-2 sm:px-4 py-3 sm:py-6 pb-28 sm:pb-8">
+    <div className="min-h-[85vh] flex flex-col justify-between max-w-xl mx-auto px-2 sm:px-4 py-3 sm:py-6 pb-32 sm:pb-8">
       {/* Runner Top Bar */}
       <header className="space-y-3 sm:space-y-4 pb-2 sm:pb-4">
         <div className="flex items-center justify-between">
@@ -271,11 +271,8 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
         />
       </header>
 
-      {/* Sponsor Placement below header */}
-      <AdSlot placement="questionScreen" className="my-2" />
-
       {/* Primary Question Presentation Card */}
-      <main className="flex-1 py-2 sm:py-6 space-y-4">
+      <main className="flex-1 py-2 sm:py-4 space-y-4">
         <Card
           variant="default"
           className={`p-4 sm:p-7 shadow-sm transition-all duration-200 ${
@@ -301,6 +298,9 @@ export const QuestionRunner: React.FC<QuestionRunnerProps> = ({
             <span>Please select an option above to continue</span>
           </div>
         )}
+
+        {/* Ad Placement: Positioned directly above the navigation buttons */}
+        <AdSlot placement="questionScreen" className="my-3 sm:my-4" />
       </main>
 
       {/* Thumb-Zone Fixed Bottom Navigation Controls */}

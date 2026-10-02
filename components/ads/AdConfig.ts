@@ -20,6 +20,9 @@ export interface AdSystemConfig {
     resultsMain: AdPlacementConfig;
     resultsSecondary: AdPlacementConfig;
     resultsList: AdPlacementConfig;
+    resultsTop: AdPlacementConfig;
+    resultsMiddle: AdPlacementConfig;
+    resultsBottom: AdPlacementConfig;
   };
 }
 
@@ -63,22 +66,48 @@ export const AD_CONFIG: AdSystemConfig = {
     resultsMain: {
       enabled: true,
       format: "nativeCard",
-      minHeight: 160,
+      minHeight: 140,
       label: "Growth Partner Offer",
       sponsorName: "Mindful Clarity Guide",
       sponsorTagline: "Structured frameworks to cultivate cognitive calm and financial intentionality.",
     },
     resultsSecondary: {
-      enabled: false,
-      format: "rectangle",
-      minHeight: 250,
-      label: "Sponsored",
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 130,
+      label: "Partner Resource",
+      sponsorName: "FocusCraft Journal",
+      sponsorTagline: "Daily reflection prompts & habits designed for high-performance minds.",
     },
     resultsList: {
       enabled: true,
       format: "nativeCard",
       minHeight: 130,
       label: "Recommended Tool",
+      sponsorName: "Personal Growth Digest",
+      sponsorTagline: "Weekly evidence-based essays on psychology, decision making, and focus.",
+    },
+    resultsTop: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 130,
+      label: "Sponsored Partner",
+      sponsorName: "Mindful Clarity Guide",
+      sponsorTagline: "Structured frameworks to cultivate cognitive calm and financial intentionality.",
+    },
+    resultsMiddle: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 130,
+      label: "Growth Partner",
+      sponsorName: "FocusCraft Journal",
+      sponsorTagline: "Daily reflection prompts & habits designed for high-performance minds.",
+    },
+    resultsBottom: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 130,
+      label: "Recommended Partner",
       sponsorName: "Personal Growth Digest",
       sponsorTagline: "Weekly evidence-based essays on psychology, decision making, and focus.",
     },

@@ -13,7 +13,7 @@ import { Recommendations } from "./Recommendations";
 import { ResultInsight } from "./ResultInsight";
 import { ResultDisclaimer } from "./ResultDisclaimer";
 import { ResultActions } from "./ResultActions";
-import { ResultAd } from "@/components/ads/ResultAd";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 
@@ -76,39 +76,45 @@ export const ResultView: React.FC<ResultViewProps> = ({ assessment }) => {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 py-2 sm:py-4 animate-in fade-in duration-300">
-      {/* 1. Main Score Display with Tier & Interpretation */}
+      {/* 1. TOP AD (Above main results) */}
+      <AdSlot placement="resultsTop" className="my-2" />
+
+      {/* Main Score Display with Tier & Interpretation */}
       <ScoreHero result={result} assessmentTitle={assessment.title} />
 
-      {/* 2. Mandatory Non-Diagnostic / Educational Notice */}
+      {/* Mandatory Non-Diagnostic / Educational Notice */}
       <ResultDisclaimer customDisclaimer={assessment.disclaimer} />
 
-      {/* 3. Dimension-Level Score Breakdown Meters */}
+      {/* Dimension-Level Score Breakdown Meters */}
       <ScoreBreakdown dimensions={result.dimensions} />
 
-      {/* 4. Narrative Analysis & Profile Summary */}
+      {/* Narrative Analysis & Profile Summary */}
       <ResultInsight
         insights={result.insights}
         tierSummary={result.tier.summary}
       />
 
-      {/* 5. Standout Strengths & Opportunities for Growth */}
+      {/* 2. IN-BETWEEN AD (Middle of results) */}
+      <AdSlot placement="resultsMiddle" className="my-4" />
+
+      {/* Standout Strengths & Opportunities for Growth */}
       <Strengths
         strengths={result.strengths}
         growthAreas={result.growthAreas}
       />
 
-      {/* 6. Non-disruptive, Zero-CLS Reserved Ad Placement */}
-      <ResultAd />
-
-      {/* 7. Actionable Next Steps & Habit Implementation */}
+      {/* Actionable Next Steps & Habit Implementation */}
       <Recommendations actionSteps={result.actionSteps} />
 
-      {/* 8. Share, Retake, and Related Assessments Navigation */}
+      {/* Share, Retake, and Related Assessments Navigation */}
       <ResultActions
         assessment={assessment}
         score={result.score}
         tierLabel={result.tier.label}
       />
+
+      {/* 3. BOTTOM AD (On bottom of results) */}
+      <AdSlot placement="resultsBottom" className="my-4" />
     </div>
   );
 };
