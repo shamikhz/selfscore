@@ -3,6 +3,8 @@ import { ASSESSMENTS_CATALOG } from "@/lib/assessments-catalog";
 
 const BASE_URL = "https://selfscore.pages.dev";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString();
 

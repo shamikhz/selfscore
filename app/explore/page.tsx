@@ -101,51 +101,79 @@ export default function ExplorePage() {
         })}
       </div>
 
-      {/* Results Count and List */}
-      <div>
-        <div className="flex items-center justify-between text-xs text-muted mb-4 font-medium">
-          <span>Showing {filteredAssessments.length} assessments</span>
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery("")}
-              className="text-primary hover:underline font-semibold"
-            >
-              Clear search
-            </button>
-          )}
+      {/* 1. TOP RESPONSIVE LEADERBOARD */}
+      <AdSlot placement="exploreTop" className="my-4" />
+
+      {/* Main Layout with Optional Desktop Sidebar */}
+      <div className="flex items-start gap-8">
+        <div className="flex-1 w-full space-y-6">
+          {/* Results Count and List */}
+          <div>
+            <div className="flex items-center justify-between text-xs text-muted mb-4 font-medium">
+              <span>Showing {filteredAssessments.length} assessments</span>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="text-primary hover:underline font-semibold"
+                >
+                  Clear search
+                </button>
+              )}
+            </div>
+
+            {filteredAssessments.length > 0 ? (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                  {filteredAssessments.slice(0, 6).map((assessment) => (
+                    <AssessmentCard key={assessment.id} assessment={assessment} />
+                  ))}
+                </div>
+
+                {/* 2. MID-GRID RECTANGLE AD (If more than 6 assessments) */}
+                {filteredAssessments.length > 6 && (
+                  <AdSlot placement="exploreMid" className="my-6" />
+                )}
+
+                {filteredAssessments.length > 6 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                    {filteredAssessments.slice(6).map((assessment) => (
+                      <AssessmentCard key={assessment.id} assessment={assessment} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="p-10 rounded-2xl bg-surface border border-surface-border text-center space-y-3">
+                <Sparkles className="w-8 h-8 text-muted mx-auto" aria-hidden="true" />
+                <h2 className="text-base font-semibold text-foreground">
+                  No matching assessments found
+                </h2>
+                <p className="text-xs text-muted-foreground max-w-sm mx-auto">
+                  We couldn’t find any assessments matching &ldquo;{searchQuery}&rdquo;. Try another
+                  keyword or select a different category.
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedCategory("all");
+                  }}
+                  className="mt-2 text-xs font-semibold text-primary hover:underline"
+                >
+                  Reset all filters
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* 3. BOTTOM NATIVE RECOMMENDATION AD */}
+          <AdSlot placement="exploreBottom" className="mt-8" />
         </div>
 
-        {filteredAssessments.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {filteredAssessments.map((assessment) => (
-              <AssessmentCard key={assessment.id} assessment={assessment} />
-            ))}
-          </div>
-        ) : (
-          <div className="p-10 rounded-2xl bg-surface border border-surface-border text-center space-y-3">
-            <Sparkles className="w-8 h-8 text-muted mx-auto" aria-hidden="true" />
-            <h2 className="text-base font-semibold text-foreground">
-              No matching assessments found
-            </h2>
-            <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-              We couldn’t find any assessments matching &ldquo;{searchQuery}&rdquo;. Try another
-              keyword or select a different category.
-            </p>
-            <button
-              onClick={() => {
-                setSearchQuery("");
-                setSelectedCategory("all");
-              }}
-              className="mt-2 text-xs font-semibold text-primary hover:underline"
-            >
-              Reset all filters
-            </button>
-          </div>
-        )}
+        {/* 4. DESKTOP STICKY SIDEBAR (Visible on XL screens) */}
+        <aside className="hidden xl:block w-44 shrink-0 sticky top-20 space-y-4">
+          <AdSlot placement="exploreSidebar" className="my-0" />
+        </aside>
       </div>
-
-      {/* Explore Page Ad Slot (Zero CLS) */}
-      <AdSlot placement="explore" className="mt-8" />
     </div>
   );
 }

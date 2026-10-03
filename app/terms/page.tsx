@@ -1,6 +1,7 @@
 import React from "react";
 import { AlertCircle, FileText, CheckCircle2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { AdSlot } from "@/components/ads/AdSlot";
 
 export const metadata = {
   title: "Terms of Service",
@@ -81,6 +82,9 @@ export default function TermsPage() {
       <p className="text-xs text-muted">
         Last updated: October 2026. SelfScore Platform.
       </p>
+
+      {/* Bottom Recommendation Ad */}
+      <AdSlot placement="termsBottom" className="my-6" />
     </div>
   );
 }

@@ -68,7 +68,10 @@ export default function RootLayout({
       <head>
         <script src="/theme-init.js" />
       </head>
-      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary-subtle selection:text-primary transition-colors duration-200">
+      <body
+        className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary-subtle selection:text-primary transition-colors duration-200"
+        suppressHydrationWarning
+      >
         {/* Skip to main content link for screen readers */}
         <a
           href="#main-content"

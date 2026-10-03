@@ -1,6 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Megaphone, Sparkles, Tag } from "lucide-react";
 import { AD_CONFIG, AdPlacementConfig } from "./AdConfig";
-import { Sparkles, ExternalLink } from "lucide-react";
+import { ADSTERRA_KEYS } from "./AdKeys";
+import { AdsterraBanner } from "./AdsterraBanner";
+import { AdsterraNative } from "./AdsterraNative";
 
 export interface AdSlotProps {
   placement: keyof typeof AD_CONFIG.placements;
@@ -8,6 +13,12 @@ export interface AdSlotProps {
 }
 
 export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const placementConfig: AdPlacementConfig = AD_CONFIG.placements[placement];
 
   if (!AD_CONFIG.globalEnabled || !placementConfig || !placementConfig.enabled) {
@@ -15,83 +26,170 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
   }
 
   const {
-    minHeight,
+    format,
+    adKey,
+    width,
+    height,
     label = "Sponsored",
-    sponsorName = "Growth Partner",
-    sponsorTagline = "Curated resources for mindful living and personal reflection.",
-    sponsorUrl = "https://selfscore.pages.dev/about",
-    format = "nativeCard",
-    liveAdTag,
   } = placementConfig;
 
+  // SSR Skeleton / Hydration Guard: Prevents HTML mismatch during hydration
+  if (!isMounted) {
+    return (
+      <aside
+        aria-label={label}
+        role="complementary"
+        className={`w-full flex items-center justify-center my-3 overflow-hidden ${className}`}
+        style={{
+          minHeight: `${height + (format === "native" ? 20 : 18)}px`,
+        }}
+      >
+        <div
+          className="w-full max-w-full rounded-xl border border-surface-border/40 bg-surface-subtle/20"
+          style={{ minHeight: `${height}px` }}
+        />
+      </aside>
+    );
+  }
+
+  // MARKER MODE: Visually marks ad placement slots without executing any Adsterra scripts/ads
+  if (AD_CONFIG.mode === "marker") {
+    if (format === "native") {
+      return (
+        <aside aria-label={label} role="complementary" className={`w-full my-4 ${className}`}>
+          <div className="w-full max-w-4xl mx-auto flex flex-col items-center justify-center p-4 rounded-xl border-2 border-dashed border-primary/40 bg-primary-subtle/30 text-center min-h-[140px]">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
+              <Sparkles className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Ad Placement Slot • Native Recommendation Feed</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Category: <strong className="text-foreground font-semibold">{label}</strong> • Reserved Zero-CLS Container
+            </p>
+          </div>
+        </aside>
+      );
+    }
+
+    if (format === "responsiveBanner") {
+      return (
+        <aside
+          aria-label={label}
+          role="complementary"
+          className={`w-full flex flex-col items-center justify-center my-4 overflow-hidden ${className}`}
+        >
+          <div className="w-full flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 border-dashed border-primary/40 bg-primary-subtle/30 text-center min-h-[70px] sm:min-h-[90px]">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
+              <Megaphone className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Ad Placement Slot • Responsive Banner (728x90 Desktop / 320x50 Mobile)</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Placement Label: <strong className="text-foreground font-semibold">{label}</strong>
+            </p>
+          </div>
+        </aside>
+      );
+    }
+
+    return (
+      <aside
+        aria-label={label}
+        role="complementary"
+        className={`flex flex-col items-center justify-center my-3 overflow-hidden ${className}`}
+        style={{
+          minHeight: `${height + 18}px`,
+          maxWidth: `${width}px`,
+          width: "100%",
+          margin: "0 auto",
+        }}
+      >
+        <div
+          className="w-full flex flex-col items-center justify-center p-3 rounded-xl border-2 border-dashed border-primary/40 bg-primary-subtle/30 text-center overflow-hidden"
+          style={{ minHeight: `${height}px` }}
+        >
+          <div className="flex flex-col items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+            <Tag className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span>Ad Placement</span>
+            <span className="px-2 py-0.5 rounded bg-surface border border-surface-border text-[11px] font-mono font-semibold text-foreground">
+              {width}x{height}
+            </span>
+          </div>
+          <span className="text-[11px] text-muted-foreground mt-2">{label}</span>
+        </div>
+      </aside>
+    );
+  }
+
+  // LIVE MODE: 1. Native Recommendation Feed
+  if (format === "native") {
+    return (
+      <aside aria-label={label} role="complementary" className={`w-full my-4 ${className}`}>
+        <AdsterraNative />
+      </aside>
+    );
+  }
+
+  // LIVE MODE: 2. Responsive Top/Bottom Banner (728x90 on Desktop, 320x50 on Mobile)
+  if (format === "responsiveBanner") {
+    return (
+      <aside
+        aria-label={label}
+        role="complementary"
+        className={`w-full flex flex-col items-center justify-center my-4 overflow-hidden ${className}`}
+      >
+        <span className="text-[10px] font-semibold tracking-wider uppercase text-muted mb-1">
+          {label}
+        </span>
+        {/* Desktop View (>= 640px): 728x90 */}
+        <div className="hidden sm:flex justify-center w-full min-h-[90px]">
+          <AdsterraBanner
+            adKey={adKey || ADSTERRA_KEYS.LEADERBOARD_728x90}
+            width={728}
+            height={90}
+            label={label}
+          />
+        </div>
+        {/* Mobile View (< 640px): 320x50 */}
+        <div className="flex sm:hidden justify-center w-full min-h-[50px]">
+          <AdsterraBanner
+            adKey={ADSTERRA_KEYS.MOBILE_320x50}
+            width={320}
+            height={50}
+            label={label}
+          />
+        </div>
+      </aside>
+    );
+  }
+
+  // LIVE MODE: 3. Fixed Format Units (300x250, 160x600, 320x50)
   return (
     <aside
       aria-label={label}
       role="complementary"
-      className={`w-full max-w-xl mx-auto px-1 ${className}`}
+      className={`flex flex-col items-center justify-center my-3 overflow-hidden ${className}`}
       style={{
-        minHeight: `${minHeight}px`,
+        minHeight: `${height + 18}px`,
+        maxWidth: `${width}px`,
+        width: "100%",
+        margin: "0 auto",
       }}
     >
-      {format === "nativeCard" ? (
-        <div
-          style={{ minHeight: `${minHeight}px` }}
-          className="w-full flex flex-col justify-between p-4 rounded-xl border border-surface-border bg-surface-subtle/80 hover:bg-surface-subtle transition-colors shadow-subtle text-left"
-        >
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-surface border border-surface-border">
-              <Sparkles className="w-2.5 h-2.5 text-accent" aria-hidden="true" />
-              <span>{label}</span>
-            </span>
-
-            <span className="text-xs text-muted flex items-center gap-1 font-medium">
-              <span>Partner</span>
-              <ExternalLink className="w-3 h-3" aria-hidden="true" />
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <h4 className="text-sm font-semibold text-foreground tracking-tight">
-              {sponsorName}
-            </h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              {sponsorTagline}
-            </p>
-          </div>
-
-          <div className="mt-3 pt-2 border-t border-surface-border/60 flex items-center justify-between text-xs text-muted">
-            <span>Non-intrusive partner resource</span>
-            <a
-              href={sponsorUrl}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="text-primary font-medium hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded px-1"
-            >
-              Learn more →
-            </a>
-          </div>
-        </div>
-      ) : (
-        <div
-          style={{ minHeight: `${minHeight}px` }}
-          className="w-full flex flex-col items-center justify-center p-4 rounded-xl border border-dashed border-surface-border bg-surface-subtle/60 text-center select-none"
-        >
-          <span className="text-[10px] uppercase tracking-wider font-semibold text-muted mb-1">
-            {label}
-          </span>
-          <div className="text-xs text-muted-foreground max-w-xs w-full">
-            {AD_CONFIG.isDevelopmentPlaceholder || !liveAdTag ? (
-              <span>Ad space reserved ({minHeight}px fixed container)</span>
-            ) : (
-              <div
-                id={`ad-slot-${placement}`}
-                className="w-full h-full"
-                dangerouslySetInnerHTML={{ __html: liveAdTag }}
-              />
-            )}
-          </div>
-        </div>
-      )}
+      <span className="text-[10px] font-semibold tracking-wider uppercase text-muted mb-1 self-center">
+        {label}
+      </span>
+      <div
+        className="w-full flex items-center justify-center rounded-xl border border-surface-border bg-surface-subtle/40 p-1 overflow-hidden"
+        style={{ minHeight: `${height}px` }}
+      >
+        <AdsterraBanner
+          adKey={adKey || ADSTERRA_KEYS.RECTANGLE_300x250}
+          width={width}
+          height={height}
+          label={label}
+        />
+      </div>
     </aside>
   );
 };
+
+export default AdSlot;

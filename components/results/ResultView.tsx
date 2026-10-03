@@ -75,46 +75,59 @@ export const ResultView: React.FC<ResultViewProps> = ({ assessment }) => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 py-2 sm:py-4 animate-in fade-in duration-300">
-      {/* 1. TOP AD (Above main results) */}
-      <AdSlot placement="resultsTop" className="my-2" />
+    <div className="w-full max-w-7xl mx-auto flex items-start justify-center gap-6 py-2 sm:py-4 animate-in fade-in duration-300">
+      {/* Left Sidebar Ad (Desktop XL) */}
+      <aside aria-label="Left Sponsor" className="hidden xl:block w-44 shrink-0 sticky top-20">
+        <AdSlot placement="resultsSidebarLeft" className="my-0" />
+      </aside>
 
-      {/* Main Score Display with Tier & Interpretation */}
-      <ScoreHero result={result} assessmentTitle={assessment.title} />
+      {/* Main Results Body */}
+      <div className="max-w-2xl mx-auto w-full space-y-6 sm:space-y-8">
+        {/* 1. TOP AD (Above main results) */}
+        <AdSlot placement="resultsTop" className="my-2" />
 
-      {/* Mandatory Non-Diagnostic / Educational Notice */}
-      <ResultDisclaimer customDisclaimer={assessment.disclaimer} />
+        {/* Main Score Display with Tier & Interpretation */}
+        <ScoreHero result={result} assessmentTitle={assessment.title} />
 
-      {/* Dimension-Level Score Breakdown Meters */}
-      <ScoreBreakdown dimensions={result.dimensions} />
+        {/* Mandatory Non-Diagnostic / Educational Notice */}
+        <ResultDisclaimer customDisclaimer={assessment.disclaimer} />
 
-      {/* Narrative Analysis & Profile Summary */}
-      <ResultInsight
-        insights={result.insights}
-        tierSummary={result.tier.summary}
-      />
+        {/* Dimension-Level Score Breakdown Meters */}
+        <ScoreBreakdown dimensions={result.dimensions} />
 
-      {/* 2. IN-BETWEEN AD (Middle of results) */}
-      <AdSlot placement="resultsMiddle" className="my-4" />
+        {/* Narrative Analysis & Profile Summary */}
+        <ResultInsight
+          insights={result.insights}
+          tierSummary={result.tier.summary}
+        />
 
-      {/* Standout Strengths & Opportunities for Growth */}
-      <Strengths
-        strengths={result.strengths}
-        growthAreas={result.growthAreas}
-      />
+        {/* 2. IN-BETWEEN AD (Middle of results) */}
+        <AdSlot placement="resultsMiddle" className="my-4" />
 
-      {/* Actionable Next Steps & Habit Implementation */}
-      <Recommendations actionSteps={result.actionSteps} />
+        {/* Standout Strengths & Opportunities for Growth */}
+        <Strengths
+          strengths={result.strengths}
+          growthAreas={result.growthAreas}
+        />
 
-      {/* Share, Retake, and Related Assessments Navigation */}
-      <ResultActions
-        assessment={assessment}
-        score={result.score}
-        tierLabel={result.tier.label}
-      />
+        {/* Actionable Next Steps & Habit Implementation */}
+        <Recommendations actionSteps={result.actionSteps} />
 
-      {/* 3. BOTTOM AD (On bottom of results) */}
-      <AdSlot placement="resultsBottom" className="my-4" />
+        {/* Share, Retake, and Related Assessments Navigation */}
+        <ResultActions
+          assessment={assessment}
+          score={result.score}
+          tierLabel={result.tier.label}
+        />
+
+        {/* 3. BOTTOM NATIVE AD (On bottom of results) */}
+        <AdSlot placement="resultsBottom" className="my-4" />
+      </div>
+
+      {/* Right Sidebar Ad (Desktop XL) */}
+      <aside aria-label="Right Sponsor" className="hidden xl:block w-44 shrink-0 sticky top-20">
+        <AdSlot placement="resultsSidebarRight" className="my-0" />
+      </aside>
     </div>
   );
 };

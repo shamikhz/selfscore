@@ -35,7 +35,9 @@ export const ScoreHero: React.FC<ScoreHeroProps> = ({ result, assessmentTitle })
         </div>
         <div className="flex items-center gap-1.5">
           <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
-          <time dateTime={completedAt}>{formattedDate}</time>
+          <time dateTime={completedAt} suppressHydrationWarning>
+            {formattedDate}
+          </time>
         </div>
       </div>
 

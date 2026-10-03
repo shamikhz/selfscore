@@ -16,7 +16,7 @@ export const AssessmentIntro: React.FC<AssessmentIntroProps> = ({ assessment }) 
     <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[260px_1fr_260px] gap-6 xl:gap-8 items-start animate-in fade-in duration-200">
       {/* Left Sidebar Ad Placement (Desktop XL) */}
       <aside aria-label="Left Sidebar Sponsor" className="hidden xl:block sticky top-20">
-        <AdSlot placement="assessmentIntro" className="my-0" />
+        <AdSlot placement="assessmentIntroLeft" className="my-0" />
       </aside>
 
       {/* Main Assessment Intro Content */}
@@ -94,6 +94,9 @@ export const AssessmentIntro: React.FC<AssessmentIntroProps> = ({ assessment }) 
           </ul>
         </Card>
 
+        {/* In-Between Mid Content Ad */}
+        <AdSlot placement="assessmentIntroMid" className="my-4" />
+
         {/* Mandatory Scientific Validity & Disclaimer Notice */}
         <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 text-amber-900 text-xs leading-relaxed">
           <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
@@ -117,13 +120,13 @@ export const AssessmentIntro: React.FC<AssessmentIntroProps> = ({ assessment }) 
           </p>
         </div>
 
-        {/* Mobile Fallback Ad placement */}
-        <AdSlot placement="assessmentIntro" className="lg:hidden" />
+        {/* Bottom Recommendation Ad */}
+        <AdSlot placement="assessmentIntroBottom" className="my-6" />
       </div>
 
       {/* Right Sidebar Ad Placement (Desktop LG & XL) */}
       <aside aria-label="Right Sidebar Sponsor" className="hidden lg:block sticky top-20">
-        <AdSlot placement="assessmentIntro" className="my-0" />
+        <AdSlot placement="assessmentIntroRight" className="my-0" />
       </aside>
     </div>
   );

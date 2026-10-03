@@ -176,8 +176,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Zero-CLS Pre-Allocated Ad Placement above Popular Assessments */}
-      <AdSlot placement="home" className="my-6" />
+      {/* 1. TOP RESPONSIVE LEADERBOARD AD */}
+      <AdSlot placement="homeTop" className="my-6" />
 
       {/* Popular Assessments Grid (3-column layout on desktop) */}
       <section aria-labelledby="popular-heading" className="space-y-4">
@@ -208,6 +208,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 2. MID-CONTENT RECTANGLE AD */}
+      <AdSlot placement="homeMid" className="my-6" />
+
       {/* Explore All CTA Banner */}
       <section className="p-8 sm:p-12 rounded-2xl bg-surface border border-surface-border text-center space-y-4 shadow-subtle">
         <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
@@ -226,7 +229,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Ad Placement Above Homepage Footer */}
+      {/* 3. BOTTOM NATIVE RECOMMENDATIONS AD */}
       <AdSlot placement="homeBottom" className="my-6" />
     </div>
   );

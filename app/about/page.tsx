@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Sparkles, Shield, Heart, Compass, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { AdSlot } from "@/components/ads/AdSlot";
 
 export const metadata = {
   title: "About SelfScore",
@@ -34,6 +35,9 @@ export default function AboutPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-200">
+      {/* Top Banner Ad */}
+      <AdSlot placement="aboutTop" className="my-2" />
+
       <div className="space-y-3">
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-foreground">
           About SelfScore
@@ -105,6 +109,9 @@ export default function AboutPage() {
           </Button>
         </Link>
       </div>
+
+      {/* Bottom Recommendation Feed Ad */}
+      <AdSlot placement="aboutBottom" className="my-6" />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { ShieldCheck, Lock, HardDrive, EyeOff } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { AdSlot } from "@/components/ads/AdSlot";
 
 export const metadata = {
   title: "Privacy Policy",
@@ -70,6 +71,9 @@ export default function PrivacyPage() {
       <p className="text-xs text-muted">
         Last updated: October 2026. For questions regarding our privacy practices, contact privacy@selfscore.local.
       </p>
+
+      {/* Bottom Recommendation Ad */}
+      <AdSlot placement="privacyBottom" className="my-6" />
     </div>
   );
 }
