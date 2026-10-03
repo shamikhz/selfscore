@@ -6,24 +6,24 @@ import { usePathname } from "next/navigation";
 import { Compass, History, Sparkles, Info, Shield, FileText, Menu, X, Home } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
+const NAV_LINKS = [
+  { href: "/explore", label: "Explore", icon: Compass },
+  { href: "/results", label: "My Results", icon: History },
+  { href: "/about", label: "About", icon: Info },
+];
+
+const MOBILE_LINKS = [
+  { href: "/", label: "Home", icon: Home },
+  { href: "/explore", label: "Explore All Tests", icon: Compass },
+  { href: "/results", label: "My Results", icon: History },
+  { href: "/about", label: "About Platform", icon: Info },
+  { href: "/privacy", label: "Privacy Policy", icon: Shield },
+  { href: "/terms", label: "Terms of Service", icon: FileText },
+];
+
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { href: "/explore", label: "Explore", icon: Compass },
-    { href: "/results", label: "My Results", icon: History },
-    { href: "/about", label: "About", icon: Info },
-  ];
-
-  const mobileLinks = [
-    { href: "/", label: "Home", icon: Home },
-    { href: "/explore", label: "Explore All Tests", icon: Compass },
-    { href: "/results", label: "My Results", icon: History },
-    { href: "/about", label: "About Platform", icon: Info },
-    { href: "/privacy", label: "Privacy Policy", icon: Shield },
-    { href: "/terms", label: "Terms of Service", icon: FileText },
-  ];
 
   return (
     <header className="sticky top-0 z-40 w-full bg-surface/90 backdrop-blur-md border-b border-surface-border">
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
             aria-label="Main Navigation"
             className="hidden sm:flex items-center gap-1.5 text-sm font-medium"
           >
-            {navLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
               return (
@@ -92,7 +92,7 @@ export const Header: React.FC = () => {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden bg-surface border-b border-surface-border shadow-raised px-4 py-3 space-y-1 animate-in slide-in-from-top-2 duration-200">
-          {mobileLinks.map((link) => {
+          {MOBILE_LINKS.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
             return (

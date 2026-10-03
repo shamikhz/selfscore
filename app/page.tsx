@@ -227,7 +227,7 @@ export default function HomePage() {
       </section>
 
       {/* Ad Placement Above Homepage Footer */}
-      <AdSlot placement="home" className="my-6" />
+      <AdSlot placement="homeBottom" className="my-6" />
     </div>
   );
 }

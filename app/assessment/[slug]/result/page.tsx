@@ -10,6 +10,8 @@ interface Props {
   };
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return ASSESSMENTS_CATALOG.map((assessment) => ({
     slug: assessment.slug,

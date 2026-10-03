@@ -13,27 +13,29 @@ export const RecentResults: React.FC = () => {
   const [recentList, setRecentList] = useState<
     Array<{ result: AssessmentResult; title: string; slug: string }>
   >([]);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const slugs = getCompletedAssessmentSlugs();
-    if (!slugs.length) return;
+    if (slugs.length) {
+      const loaded = slugs
+        .map((slug) => {
+          const res = getSavedResult(slug);
+          const meta = getAssessmentBySlug(slug);
+          if (res && meta) {
+            return { result: res, title: meta.title, slug: meta.slug };
+          }
+          return null;
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== null)
+        .slice(0, 3); // show at most 3 recent results
 
-    const loaded = slugs
-      .map((slug) => {
-        const res = getSavedResult(slug);
-        const meta = getAssessmentBySlug(slug);
-        if (res && meta) {
-          return { result: res, title: meta.title, slug: meta.slug };
-        }
-        return null;
-      })
-      .filter((item): item is NonNullable<typeof item> => item !== null)
-      .slice(0, 3); // show at most 3 recent results
-
-    setRecentList(loaded);
+      setRecentList(loaded);
+    }
+    setIsReady(true);
   }, []);
 
-  if (!recentList.length) return null;
+  if (!isReady || !recentList.length) return null;
 
   return (
     <section className="mb-10 animate-in fade-in duration-300">

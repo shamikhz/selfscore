@@ -5,11 +5,15 @@ import { ASSESSMENTS_CATALOG } from "@/lib/assessments-catalog";
 import { getAssessmentDefinition } from "@/assessments/registry";
 import { QuestionRunner } from "@/components/assessment/QuestionRunner";
 
+import { AssessmentErrorBoundary } from "@/components/assessment/AssessmentErrorBoundary";
+
 interface Props {
   params: {
     slug: string;
   };
 }
+
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return ASSESSMENTS_CATALOG.map((assessment) => ({
@@ -43,11 +47,13 @@ export default function AssessmentQuestionsPage({ params }: Props) {
   }
 
   return (
-    <QuestionRunner
-      slug={definition.meta.slug}
-      meta={definition.meta}
-      questions={definition.questions}
-      tiers={definition.tiers}
-    />
+    <AssessmentErrorBoundary assessmentSlug={definition.meta.slug}>
+      <QuestionRunner
+        slug={definition.meta.slug}
+        meta={definition.meta}
+        questions={definition.questions}
+        tiers={definition.tiers}
+      />
+    </AssessmentErrorBoundary>
   );
 }

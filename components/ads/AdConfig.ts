@@ -7,6 +7,9 @@ export interface AdPlacementConfig {
   label?: string;
   sponsorName?: string;
   sponsorTagline?: string;
+  sponsorUrl?: string;
+  liveAdTag?: string;
+  liveAdSlotId?: string;
 }
 
 export interface AdSystemConfig {
@@ -14,6 +17,7 @@ export interface AdSystemConfig {
   isDevelopmentPlaceholder: boolean;
   placements: {
     home: AdPlacementConfig;
+    homeBottom: AdPlacementConfig;
     explore: AdPlacementConfig;
     assessmentIntro: AdPlacementConfig;
     questionScreen: AdPlacementConfig;
@@ -41,6 +45,16 @@ export const AD_CONFIG: AdSystemConfig = {
       label: "Sponsored Resource",
       sponsorName: "FocusCraft",
       sponsorTagline: "Science-backed tools & journaling prompts for daily cognitive performance.",
+      sponsorUrl: "https://selfscore.pages.dev/about",
+    },
+    homeBottom: {
+      enabled: true,
+      format: "nativeCard",
+      minHeight: 140,
+      label: "Partner Feature",
+      sponsorName: "DeepHabits App",
+      sponsorTagline: "Turn your assessment strengths into lasting daily routines without burnout.",
+      sponsorUrl: "https://selfscore.pages.dev/about",
     },
     explore: {
       enabled: true,

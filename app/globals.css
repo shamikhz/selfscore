@@ -32,6 +32,11 @@
   --success-foreground: #ffffff;
   --success-subtle: #f0fdf4; /* Green-50 */
 
+  /* Danger & Critical errors */
+  --danger: #dc2626; /* Red-600 */
+  --danger-foreground: #ffffff;
+  --danger-subtle: #fef2f2; /* Red-50 */
+
   /* Borders & radii */
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -72,6 +77,11 @@
   --success-foreground: #ffffff;
   --success-subtle: #052e16; /* Green-950 */
 
+  /* Danger & Critical errors in dark mode */
+  --danger: #f87171; /* Red-400 */
+  --danger-foreground: #ffffff;
+  --danger-subtle: #450a0a; /* Red-950 */
+
   /* Focus ring */
   --focus-ring: #60a5fa;
 }
@@ -83,9 +93,14 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (min-width: 640px) {

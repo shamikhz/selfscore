@@ -7,6 +7,7 @@ import { BottomNav } from "@/components/navigation/BottomNav";
 import { PwaRegister } from "@/components/PwaRegister";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://selfscore.pages.dev"),
   title: {
     template: "%s | SelfScore",
     default: "SelfScore — Thoughtful Self-Assessments for Personal Growth",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: "/icons/icon.svg",
-    apple: "/icons/icon.svg",
+    apple: "/icons/icon-192.png",
   },
   appleWebApp: {
     capable: true,
@@ -26,11 +27,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/",
+    url: "https://selfscore.pages.dev",
     siteName: "SelfScore",
     title: "SelfScore — Thoughtful Self-Assessments",
     description:
       "Private, human-designed self-assessments for personal discovery. No account required.",
+    images: [
+      {
+        url: "/icons/icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "SelfScore Assessment Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SelfScore — Thoughtful Self-Assessments",
+    description:
+      "Private, evidence-inspired self-assessments for personal discovery and cognitive reflection.",
+    images: ["/icons/icon-512.png"],
   },
 };
 
@@ -50,21 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var theme = localStorage.getItem('selfscore_theme');
-                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (theme === 'dark' || (!theme && prefersDark)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
+        <script src="/theme-init.js" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary-subtle selection:text-primary transition-colors duration-200">
         {/* Skip to main content link for screen readers */}

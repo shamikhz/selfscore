@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Sparkles, RefreshCw } from "lucide-react";
 
 export const PwaRegister: React.FC = () => {
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       if (process.env.NODE_ENV === "production") {
@@ -21,7 +24,8 @@ export const PwaRegister: React.FC = () => {
                     installingWorker.state === "installed" &&
                     navigator.serviceWorker.controller
                   ) {
-                    console.log("[PWA] New version available and cached in background.");
+                    console.log("[PWA] New version available and ready.");
+                    setUpdateAvailable(true);
                   }
                 });
               }
@@ -37,7 +41,7 @@ export const PwaRegister: React.FC = () => {
           window.addEventListener("load", registerServiceWorker);
         }
       } else {
-        // In development mode, unregister any active service worker to prevent CSS/chunk caching 500s
+        // In development mode, unregister any active service worker
         navigator.serviceWorker.getRegistrations().then((registrations) => {
           for (const registration of registrations) {
             registration.unregister();
@@ -47,5 +51,31 @@ export const PwaRegister: React.FC = () => {
     }
   }, []);
 
-  return null;
+  const handleReload = () => {
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
+  };
+
+  if (!updateAvailable) return null;
+
+  return (
+    <aside
+      aria-label="Application Update Notice"
+      className="fixed bottom-20 sm:bottom-6 right-4 z-50 animate-in slide-in-from-bottom-5 duration-300"
+    >
+      <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-foreground text-background shadow-raised border border-foreground/10 text-xs font-medium">
+        <Sparkles className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
+        <span>New updates available</span>
+        <button
+          type="button"
+          onClick={handleReload}
+          className="inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary-hover transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          <RefreshCw className="w-3 h-3" aria-hidden="true" />
+          <span>Refresh</span>
+        </button>
+      </div>
+    </aside>
+  );
 };

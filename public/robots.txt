@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /assessment/*/questions
+Disallow: /assessment/*/start
 Disallow: /offline
 
 Sitemap: https://selfscore.pages.dev/sitemap.xml

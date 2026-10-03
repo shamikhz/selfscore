@@ -38,6 +38,11 @@ const config: Config = {
           foreground: "var(--success-foreground)",
           subtle: "var(--success-subtle)",
         },
+        danger: {
+          DEFAULT: "var(--danger)",
+          foreground: "var(--danger-foreground)",
+          subtle: "var(--danger-subtle)",
+        },
       },
       fontFamily: {
         sans: [

@@ -19,14 +19,16 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
     label = "Sponsored",
     sponsorName = "Growth Partner",
     sponsorTagline = "Curated resources for mindful living and personal reflection.",
+    sponsorUrl = "https://selfscore.pages.dev/about",
     format = "nativeCard",
+    liveAdTag,
   } = placementConfig;
 
   return (
     <aside
       aria-label={label}
       role="complementary"
-      className={`w-full max-w-xl mx-auto my-4 px-1 ${className}`}
+      className={`w-full max-w-xl mx-auto px-1 ${className}`}
       style={{
         minHeight: `${minHeight}px`,
       }}
@@ -58,10 +60,15 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
           </div>
 
           <div className="mt-3 pt-2 border-t border-surface-border/60 flex items-center justify-between text-xs text-muted">
-            <span>Non-intrusive sponsor notice</span>
-            <span className="text-primary font-medium hover:underline cursor-pointer">
+            <span>Non-intrusive partner resource</span>
+            <a
+              href={sponsorUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="text-primary font-medium hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded px-1"
+            >
               Learn more →
-            </span>
+            </a>
           </div>
         </div>
       ) : (
@@ -72,11 +79,15 @@ export const AdSlot: React.FC<AdSlotProps> = ({ placement, className = "" }) => 
           <span className="text-[10px] uppercase tracking-wider font-semibold text-muted mb-1">
             {label}
           </span>
-          <div className="text-xs text-muted-foreground max-w-xs">
-            {AD_CONFIG.isDevelopmentPlaceholder ? (
+          <div className="text-xs text-muted-foreground max-w-xs w-full">
+            {AD_CONFIG.isDevelopmentPlaceholder || !liveAdTag ? (
               <span>Ad space reserved ({minHeight}px fixed container)</span>
             ) : (
-              <div id={`ad-slot-${placement}`} className="w-full h-full" />
+              <div
+                id={`ad-slot-${placement}`}
+                className="w-full h-full"
+                dangerouslySetInnerHTML={{ __html: liveAdTag }}
+              />
             )}
           </div>
         </div>
